@@ -1,5 +1,4 @@
 package pl.edu.agh.cs;
-import javafx.css.converter.DeriveColorConverter;
 import org.junit.Assert;
 import org.junit.Test;
 
