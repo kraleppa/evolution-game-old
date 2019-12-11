@@ -42,4 +42,20 @@ public enum Azimuth {
         return null;
     }
 
+    public Azimuth next(){
+        switch (this){
+            case N: return Azimuth.NE;
+            case NE: return Azimuth.E;
+            case E: return Azimuth.SE;
+            case SE: return Azimuth.S;
+            case S: return Azimuth.SW;
+            case SW: return Azimuth.W;
+            case W: return Azimuth.NW;
+            case NW: return Azimuth.N;
+            default: return null;
+        }
+    }
+
+
+
 }

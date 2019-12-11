@@ -14,6 +14,14 @@ public class Vector2D {
         this.y = 0;
     }
 
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
     @Override
     public String toString(){
         return String.format("(%d,%d)", this.x, this.y);
@@ -57,4 +65,13 @@ public class Vector2D {
     public Vector2D opposite(){
         return new Vector2D((-1) * this.x, (-1) * this.y);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 13;
+        hash += this.x * 31;
+        hash += this.y * 17;
+        return hash;
+    }
+
 }
