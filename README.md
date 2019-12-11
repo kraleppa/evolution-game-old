@@ -1,7 +1,7 @@
 # evolution-game
 # TODO
-- [ ] Stworzyć najprostszą mapę
-- [ ] Położyć na niej animala i narysować
+- [x] Stworzyć najprostszą mapę
+- [x] Położyć na niej animala i narysować
 - [ ] Położyć wiele animali
 - [ ] Sprawić aby mogły się ruszać w predefiniowany sposób (na jednym miejscu dowolna ilość)(obsesrver) 
 - [ ] Sprawić aby mapa się zawijała

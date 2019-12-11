@@ -1,8 +1,8 @@
 package pl.edu.agh.cs;
 
 public class Vector2D {
-    final private int x;
-    final private int y;
+    final public int x;
+    final public int y;
 
     public Vector2D(int x, int y){
         this.x = x;
@@ -13,15 +13,6 @@ public class Vector2D {
         this.x = 0;
         this.y = 0;
     }
-
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
-        return y;
-    }
-
     @Override
     public String toString(){
         return String.format("(%d,%d)", this.x, this.y);
