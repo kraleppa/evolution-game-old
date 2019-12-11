@@ -37,7 +37,7 @@ public interface IWorldMap {
      * @param directions
      *            Array of move directions.
      */
-    void run(Azimuth[] directions);
+    void run(Integer directions[]);
 
     /**
      * Return true if given position on the map is occupied. Should not be

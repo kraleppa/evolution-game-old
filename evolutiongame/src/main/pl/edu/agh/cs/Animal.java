@@ -1,7 +1,9 @@
 package pl.edu.agh.cs;
 
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Animal {
     private Vector2D position;
@@ -9,6 +11,8 @@ public class Animal {
     private int energy;
     private String[] genotype;
     IWorldMap map;
+    Set<IPositionChangeObserver> observersSet = new HashSet<>();
+
     public Animal (IWorldMap map){
         this.orientation = Azimuth.N;
         this.position = new Vector2D(2,2);
@@ -41,8 +45,20 @@ public class Animal {
         }
     }
 
-    public void move(Azimuth direction){
-        //TODO
+    public void move(){
+        Vector2D newVector = this.position.add(this.orientation.toUnitVector());
+        if (map.canMoveTo(newVector)){
+            positionChanged(this.getPosition(), newVector);
+            this.position = newVector;
+        }
+    }
+
+    protected void addObserver(IPositionChangeObserver observer){
+        observersSet.add(observer);
+    }
+
+    protected void removeObserver(IPositionChangeObserver observer){
+        observersSet.remove(observer);
     }
 
     public Vector2D getPosition(){
@@ -53,5 +69,10 @@ public class Animal {
         return this.orientation;
     }
 
+    private void positionChanged(Vector2D oldPosition, Vector2D newPosition) {
+        for (IPositionChangeObserver observer : observersSet) {
+            observer.positionChanged(oldPosition, newPosition, this);
+        }
+    }
 
 }
