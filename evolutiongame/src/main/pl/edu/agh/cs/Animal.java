@@ -47,9 +47,9 @@ public class Animal {
         }
     }
 
-    public Integer turnAroundAuto(){
+    public void turnAroundAuto(){
         int rnd = new Random().nextInt(this.genotype.length);
-        return this.genotype[rnd];
+        this.turnAround(this.genotype[rnd]);
     }
 
     public void move(){
