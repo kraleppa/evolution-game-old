@@ -1,5 +1,5 @@
 # evolution-game
-# TODO
+TODO
 - [x] Stworzyć najprostszą mapę
 - [x] Położyć na niej animala i narysować
 - [x] Położyć wiele animali
