@@ -83,10 +83,8 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     @Override
     public Object objectAt(Vector2D position){
         HashSet<Animal> set = animalsMap.get(position);
-        if (set == null)
-            return null;
-        if (set.isEmpty())
-            return null;
+        if (set == null || set.isEmpty())
+            return this.grassMap.get(position);
         if (set.size() == 1){
             for (Animal animal : set){
                 return animal;
@@ -111,6 +109,11 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         else{
             tmp.add(animal);
         }
+    }
+
+    public void createGrass(Vector2D position){
+        Grass grass = new Grass(this.betterPosition(position));
+        grassMap.put(this.betterPosition(position), grass);
     }
 
 }
