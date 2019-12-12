@@ -1,28 +1,30 @@
 package pl.edu.agh.cs;
 
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Animal {
     private Vector2D position;
     private Azimuth orientation;
     private int energy;
-    private String[] genotype;
+    private Integer[] genotype;
     WorldMap map;
     Set<IPositionChangeObserver> observersSet = new HashSet<>();
 
     public Animal (WorldMap map){
-        this.orientation = Azimuth.N;
-        this.position = new Vector2D(2,2);
-        this.map = map;
+        this(map, new Vector2D(2,2));
     }
 
     public Animal (WorldMap map, Vector2D initialPosition){
         this.orientation = Azimuth.N;
         this.position = initialPosition;
         this.map = map;
+    }
+
+    public Animal(WorldMap map, Vector2D initialPosition, Integer[] Genotype){
+        this.orientation = Azimuth.N;
+        this.position = initialPosition;
+        this.map = map;
+        this.genotype = Genotype;
     }
 
     public String toString(){
@@ -43,6 +45,11 @@ public class Animal {
         for (int i = 0; i < number; i++){
             this.orientation = this.orientation.next();
         }
+    }
+
+    public Integer turnAroundAuto(){
+        int rnd = new Random().nextInt(this.genotype.length);
+        return this.genotype[rnd];
     }
 
     public void move(){
