@@ -1,5 +1,7 @@
 package pl.edu.agh.cs;
 
+import java.util.HashSet;
+
 /**
  * The map visualizer converts the {@link IWorldMap} map into a string
  * representation.
@@ -73,6 +75,9 @@ public class MapVisualizer {
         String result = null;
         if (this.map.isOccupied(currentPosition)) {
             Object object = this.map.objectAt(currentPosition);
+            if (object instanceof HashSet && ((HashSet) object).size() != 1){
+                    result = ((Integer)((HashSet) object).size()).toString();
+            }else
             if (object != null) {
                 result = object.toString();
             } else {

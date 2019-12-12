@@ -43,6 +43,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
             Animal tmp = animalsList.get(i % animalsList.size());
             tmp.turnAround(direction);
             tmp.move();
+            i++;
         }
 
     }
@@ -61,16 +62,12 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
             return null;
         if (set.isEmpty())
             return null;
-        Integer i = 0;
-        Animal retAnimal = null;
-        for (Animal animal : set){
-            i++;
-            retAnimal = animal;
+        if (set.size() == 1){
+            for (Animal animal : set){
+                return animal;
+            }
         }
-        if (i == 1)
-            return retAnimal;
-        else
-            return i;
+        return set;
     }
 
     public String drawMap(){
