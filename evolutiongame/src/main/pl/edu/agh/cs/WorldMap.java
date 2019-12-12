@@ -1,5 +1,7 @@
 package pl.edu.agh.cs;
 
+import javax.net.ssl.SSLContext;
+import javax.sound.midi.SysexMessage;
 import java.util.*;
 
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
@@ -11,7 +13,6 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     MapVisualizer visualizer;
     int width;
     int height;
-    int dayNumber;
 
     public WorldMap(Vector2D upperRight){
         this.upperRight = upperRight;
@@ -19,7 +20,16 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         this.visualizer = new MapVisualizer(this);
         this.height = upperRight.y + 1;
         this.width = upperRight.x + 1;
-        this.dayNumber = 0;
+    }
+
+    public void startSimulation(int numberOfDays){
+        System.out.println("Day: 0");
+        System.out.println(this.drawMap());
+        for (int i = 1; i <= numberOfDays; i++){
+            this.nextDay();
+            System.out.println("Day: " + i);
+            System.out.println(this.drawMap());
+        }
     }
 
     public void nextDay(){

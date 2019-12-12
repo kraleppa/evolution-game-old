@@ -9,21 +9,9 @@ public class World {
         Animal sheep = new Animal(map, new Vector2D(1,1), new Integer[]{0, 0, 0, 0, 3, 3, 3, 0, 1, 1, 4, 4, 4, 4, 4, 2, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 0, 0, 1, 1});
         map.place(fox);
         map.place(sheep);
-        System.out.println(map.drawMap());
-        map.nextDay();
-        System.out.println(map.drawMap());
-        map.nextDay();
-        System.out.println(map.drawMap());
-        map.nextDay();
-        System.out.println(map.drawMap());
-        map.nextDay();
-        System.out.println(map.drawMap());
-        map.nextDay();
-        System.out.println(map.drawMap());
-        map.nextDay();
-        System.out.println(map.drawMap());
+        map.startSimulation(20);
 
-
+        //zrobic klase simulation i przeniesc do niej rzeczy z map odnoszacych sie do simulation!!!!!!!!!!
 
     }
 

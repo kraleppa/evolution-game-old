@@ -7,7 +7,7 @@ TODO
 - [x] Sprawić aby mapa się zawijała
 - [x] Dodać funkcje obracajaca zwierzaka automatycznie
 - [x] położyć na mapie ręcznie rośiny
-- [ ] Dodać cykl dniowy (podajesz liczbe dni i robi się symulacja)
+- [x] Dodać cykl dniowy (podajesz liczbe dni i robi się symulacja)
 - [ ] Sprawić aby na mapie pojawiały się rośliny
 - [ ] Sprawić aby animale traciły energie przy poruszaniu się
 - [ ] Sprawić aby animale zjadały rośliny i odradzały energie
