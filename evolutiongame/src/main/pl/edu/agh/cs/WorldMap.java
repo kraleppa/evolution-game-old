@@ -11,6 +11,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     MapVisualizer visualizer;
     int width;
     int height;
+    int dayNumber;
 
     public WorldMap(Vector2D upperRight){
         this.upperRight = upperRight;
@@ -18,7 +19,19 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         this.visualizer = new MapVisualizer(this);
         this.height = upperRight.y + 1;
         this.width = upperRight.x + 1;
+        this.dayNumber = 0;
     }
+
+    public void nextDay(){
+        for (Animal animal : animalsList){
+            animal.turnAroundAuto();
+        }
+
+        for (Animal animal : animalsList){
+            animal.move();
+        }
+    }
+
     @Override
     public boolean canMoveTo(Vector2D position){
         return true;
