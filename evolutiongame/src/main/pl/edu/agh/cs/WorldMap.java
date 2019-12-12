@@ -5,6 +5,7 @@ import java.util.*;
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
     private List<Animal> animalsList = new ArrayList<>();
     private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();
+    private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private Vector2D lowerLeft;
     private Vector2D upperRight;
     MapVisualizer visualizer;
@@ -45,7 +46,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
 
     @Override
     public boolean place(Animal animal){
-        Vector2D animalPosition = this.betterPosition(animal.getPosition());
+        Vector2D animalPosition = animal.getPosition();
         HashSet<Animal> tmp = animalsMap.get(animalPosition);
         if (tmp == null){
             tmp = new HashSet<>();

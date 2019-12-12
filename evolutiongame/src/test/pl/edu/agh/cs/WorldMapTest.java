@@ -23,6 +23,8 @@ public class WorldMapTest {
         Assert.assertNull(map.objectAt(new Vector2D(-55, -55)));
     }
 
+
+
     @Test
     public void isOccupiedTest(){
         WorldMap map = new WorldMap(new Vector2D(10,10));
@@ -53,6 +55,14 @@ public class WorldMapTest {
         Assert.assertEquals(new Vector2D(6,6), map.betterPosition(new Vector2D(6,6)));
         Assert.assertEquals(new Vector2D(0, 0), map.betterPosition(new Vector2D(0,0)));
         Assert.assertEquals(new Vector2D(1, 0), map.betterPosition(new Vector2D(8, 0)));
+    }
+
+    @Test
+    public void betterPositionPlaceTest(){
+        WorldMap map = new WorldMap(new Vector2D(6,6));
+        Animal fox = new Animal(map, new Vector2D(7, 7));
+        map.place(fox);
+        Assert.assertEquals(fox, map.objectAt(new Vector2D(0,0)));
     }
 
 }

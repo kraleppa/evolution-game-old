@@ -15,14 +15,13 @@ public class Animal {
     }
 
     public Animal (WorldMap map, Vector2D initialPosition){
-        this.orientation = Azimuth.N;
-        this.position = initialPosition;
-        this.map = map;
+        this(map, initialPosition, null);
     }
 
     public Animal(WorldMap map, Vector2D initialPosition, Integer[] Genotype){
+
         this.orientation = Azimuth.N;
-        this.position = initialPosition;
+        this.position = map.betterPosition(initialPosition);
         this.map = map;
         this.genotype = Genotype;
     }
