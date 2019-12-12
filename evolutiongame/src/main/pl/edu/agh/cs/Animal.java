@@ -10,16 +10,16 @@ public class Animal {
     private Azimuth orientation;
     private int energy;
     private String[] genotype;
-    IWorldMap map;
+    WorldMap map;
     Set<IPositionChangeObserver> observersSet = new HashSet<>();
 
-    public Animal (IWorldMap map){
+    public Animal (WorldMap map){
         this.orientation = Azimuth.N;
         this.position = new Vector2D(2,2);
         this.map = map;
     }
 
-    public Animal (IWorldMap map, Vector2D initialPosition){
+    public Animal (WorldMap map, Vector2D initialPosition){
         this.orientation = Azimuth.N;
         this.position = initialPosition;
         this.map = map;
@@ -46,7 +46,7 @@ public class Animal {
     }
 
     public void move(){
-        Vector2D newVector = this.position.add(this.orientation.toUnitVector());
+        Vector2D newVector = map.betterPosition(this.position.add(this.orientation.toUnitVector()));
         if (map.canMoveTo(newVector)){
             positionChanged(this.getPosition(), newVector);
             this.position = newVector;

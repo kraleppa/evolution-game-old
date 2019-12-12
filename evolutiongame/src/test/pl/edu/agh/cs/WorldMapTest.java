@@ -46,4 +46,13 @@ public class WorldMapTest {
 
     }
 
+    @Test
+    public void betterPositionTest(){
+        WorldMap map = new WorldMap(new Vector2D(6,6));
+        Assert.assertEquals(new Vector2D(0, 1),map.betterPosition(new Vector2D(7,1)));
+        Assert.assertEquals(new Vector2D(6,6), map.betterPosition(new Vector2D(6,6)));
+        Assert.assertEquals(new Vector2D(0, 0), map.betterPosition(new Vector2D(0,0)));
+        Assert.assertEquals(new Vector2D(1, 0), map.betterPosition(new Vector2D(8, 0)));
+    }
+
 }

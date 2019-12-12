@@ -24,4 +24,15 @@ public class MovementTest {
         }
     }
 
+    @Test
+    public void EdgeTest(){
+        WorldMap map = new WorldMap(new Vector2D(6,6));
+        Animal rocky = new Animal(map, new Vector2D(5,5));
+        map.place(rocky);
+        rocky.move();
+        Assert.assertEquals(rocky, map.objectAt(new Vector2D(5,6)));
+        rocky.move();
+        Assert.assertEquals(rocky, map.objectAt(new Vector2D(5,0)));
+    }
+
 }
