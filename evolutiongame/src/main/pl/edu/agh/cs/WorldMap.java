@@ -12,19 +12,24 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     private final Vector2D upperRight;
     public final Integer width;
     public final Integer height;
-    public final Integer startEnergy = 10;
+    public final Integer startEnergy;
     public final Integer moveEnergy = 2;
-    public final Integer plantEnergy = 1;
+    public final Integer plantEnergy = 100;
     public final Double jungleRatio = 0.5;
     public MapVisualizer visualizer;
 
 
     public WorldMap(Vector2D upperRight){
+        this(upperRight, 10);
+    }
+
+    public WorldMap(Vector2D upperRight,Integer startEnergy){
         this.upperRight = upperRight;
         this.lowerLeft = new Vector2D(0,0);
         this.visualizer = new MapVisualizer(this);
         this.height = upperRight.y + 1;
         this.width = upperRight.x + 1;
+        this.startEnergy = startEnergy;
     }
 
 
@@ -123,7 +128,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
 
     public void generateGrass(){
         Random r = new Random();
-        Vector2D position = new Vector2D(r.nextInt(upperRight.x + 1), r.nextInt(upperRight.y));
+        Vector2D position = new Vector2D(r.nextInt(upperRight.x + 1), r.nextInt(upperRight.y + 1));
         if (!grassMap.containsKey(position)){
             Grass grass = new Grass(position);
             grassMap.put(position, grass);
@@ -143,26 +148,34 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     }
 
     public void clearDeadAnimals(){
-        //animalsList.remove(i);
+        List<Animal> animalsListIterate = new ArrayList<>();
+        animalsListIterate.addAll(animalsList);
         int i = 0;
-        boolean[] toDelete = new boolean[animalsList.size()];
-        for (Animal animal : animalsList){
+        for (Animal animal : animalsListIterate){
             if(animal.isDead()){
                 HashSet<Animal> tmp = this.animalsMap.get(animal.getPosition());
                 tmp.remove(animal);
-                toDelete[i] = true;
+                animalsList.remove(i);
+            }else{
+                i++;
             }
-            else{
-                toDelete[i] = false;
-            }
-            i++;
+
         }
 
-        for (int j = 0; j < animalsList.size(); j++){
-            if (toDelete[j]){
-                animalsList.remove(j);
+
+    }
+
+    public void eatAll(){
+        for (Animal animal : animalsList){
+            Vector2D currentPosition = animal.getPosition();
+            if (!grassMap.containsKey(currentPosition)) {
+                continue;
+            }
+            if (animalsMap.get(currentPosition).size() == 1){
+                animal.eat();
+                grassMap.remove(currentPosition);
+                continue;
             }
         }
-
     }
 }

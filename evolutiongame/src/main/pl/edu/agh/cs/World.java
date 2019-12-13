@@ -19,7 +19,7 @@ public class World {
 
         map.generateGrass();
         Simulation sim = new Simulation(map);
-        sim.startSimulation(20);
+        sim.startSimulation(100);
 
 
     }

@@ -26,7 +26,7 @@ public class Simulation {
         map.turnAllAnimals();
         map.moveAllAnimals();
         map.clearDeadAnimals();
-
+        map.eatAll();
         for (int i = 0; i < Math.sqrt(map.width + map.height); i++){
             map.generateGrass();
         }

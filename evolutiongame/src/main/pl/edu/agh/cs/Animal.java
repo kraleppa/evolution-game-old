@@ -95,7 +95,10 @@ public class Animal {
 
     public boolean isDead(){
         return (energy <= 0);
+    }
 
+    public void eat(){
+        this.energy += map.plantEnergy;
     }
 
 
