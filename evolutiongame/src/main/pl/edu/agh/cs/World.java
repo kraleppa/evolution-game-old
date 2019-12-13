@@ -1,4 +1,7 @@
 package pl.edu.agh.cs;
+
+import java.util.Arrays;
+
 //0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7, 7, 7
 //0, 0, 0, 0, 3, 3, 3, 0, 1, 1, 4, 4, 4, 4, 4, 2, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 0, 0, 1, 1
 public class World {
@@ -9,9 +12,14 @@ public class World {
         Animal sheep = new Animal(map, new Vector2D(1,1), new Integer[]{0, 0, 0, 0, 3, 3, 3, 0, 1, 1, 4, 4, 4, 4, 4, 2, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 0, 0, 1, 1});
         map.place(fox);
         map.place(sheep);
-        map.startSimulation(20);
+        map.place(new Animal(map));
+        map.place(new Animal(map));
+        map.place(new Animal(map));
+        map.place(new Animal(map));
 
-        //zrobic klase simulation i przeniesc do niej rzeczy z map odnoszacych sie do simulation!!!!!!!!!!
+        Simulation sim = new Simulation(map);
+        sim.startSimulation(20);
+
 
     }
 

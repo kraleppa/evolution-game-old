@@ -5,7 +5,7 @@ import javax.sound.midi.SysexMessage;
 import java.util.*;
 
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
-    private List<Animal> animalsList = new ArrayList<>();
+    public List<Animal> animalsList = new ArrayList<>();
     private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private Vector2D lowerLeft;
@@ -22,25 +22,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         this.width = upperRight.x + 1;
     }
 
-    public void startSimulation(int numberOfDays){
-        System.out.println("Day: 0");
-        System.out.println(this.drawMap());
-        for (int i = 1; i <= numberOfDays; i++){
-            this.nextDay();
-            System.out.println("Day: " + i);
-            System.out.println(this.drawMap());
-        }
-    }
 
-    public void nextDay(){
-        for (Animal animal : animalsList){
-            animal.turnAroundAuto();
-        }
-
-        for (Animal animal : animalsList){
-            animal.move();
-        }
-    }
 
     @Override
     public boolean canMoveTo(Vector2D position){

@@ -1,5 +1,6 @@
 package pl.edu.agh.cs;
 
+import javax.swing.*;
 import java.util.*;
 
 public class Animal {
@@ -15,7 +16,7 @@ public class Animal {
     }
 
     public Animal (WorldMap map, Vector2D initialPosition){
-        this(map, initialPosition, null);
+        this(map, initialPosition, Animal.randomGenotype());
     }
 
     public Animal(WorldMap map, Vector2D initialPosition, Integer[] Genotype){
@@ -24,6 +25,15 @@ public class Animal {
         this.position = map.betterPosition(initialPosition);
         this.map = map;
         this.genotype = Genotype;
+    }
+
+    static private Integer[] randomGenotype(){
+        Random r = new Random();
+        Integer[] genotype = new Integer[32];
+        for (int i = 0; i < 32; i++){
+            genotype[i] = r.nextInt(8);
+        }
+        return genotype;
     }
 
     public String toString(){
@@ -80,5 +90,7 @@ public class Animal {
             observer.positionChanged(oldPosition, newPosition, this);
         }
     }
+
+
 
 }
