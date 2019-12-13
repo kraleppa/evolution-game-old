@@ -17,6 +17,7 @@ public class World {
         map.place(new Animal(map));
         map.place(new Animal(map));
 
+        map.generateGrass();
         Simulation sim = new Simulation(map);
         sim.startSimulation(20);
 

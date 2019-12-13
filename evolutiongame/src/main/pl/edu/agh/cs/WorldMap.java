@@ -8,12 +8,11 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public List<Animal> animalsList = new ArrayList<>();
     private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
-    private Vector2D lowerLeft;
-    private Vector2D upperRight;
-    MapVisualizer visualizer;
-    int width;
-    int height;
-
+    private final Vector2D lowerLeft;
+    private final Vector2D upperRight;
+    public final int width;
+    public final int height;
+    public MapVisualizer visualizer;
     public WorldMap(Vector2D upperRight){
         this.upperRight = upperRight;
         this.lowerLeft = new Vector2D(0,0);
@@ -116,9 +115,13 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         }
     }
 
-    public void createGrass(Vector2D position){
-        Grass grass = new Grass(this.betterPosition(position));
-        grassMap.put(this.betterPosition(position), grass);
-    }
+    public void generateGrass(){
+        Random r = new Random();
+        Vector2D position = new Vector2D(r.nextInt(upperRight.x + 1), r.nextInt(upperRight.y));
+        if (!grassMap.containsKey(position)){
+            Grass grass = new Grass(position);
+            grassMap.put(position, grass);
+        }
 
+    }
 }
