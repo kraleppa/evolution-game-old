@@ -6,7 +6,7 @@ import java.util.*;
 public class Animal {
     private Vector2D position;
     private Azimuth orientation;
-    private int energy;
+    private double energy;
     private Integer[] genotype;
     WorldMap map;
     Set<IPositionChangeObserver> observersSet = new HashSet<>();
@@ -97,8 +97,12 @@ public class Animal {
         return (energy <= 0);
     }
 
-    public void eat(){
-        this.energy += map.plantEnergy;
+    public double getEnergy() {
+        return energy;
+    }
+
+    public void eat(double addEnergy){
+        this.energy += addEnergy;
     }
 
 

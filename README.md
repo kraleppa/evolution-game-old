@@ -10,10 +10,12 @@ TODO
 - [x] Dodać cykl dniowy (podajesz liczbe dni i robi się symulacja)
 - [x] Sprawić aby na mapie pojawiały się rośliny
 - [x] Sprawić aby animale traciły energie przy poruszaniu się
-- [ ] Sprawić aby animale zjadały rośliny i odradzały energie
+- [x] Sprawić aby animale zjadały rośliny i odradzały energie
 - [x] Dodać mechanizm niszczenia animali o energii 0
+- [ ] Ogarnąć testy dotychczasowej symulacji
 - [ ] Dodać mechanizm rozmnażania
 - [ ] Dodać dżungle
-
+- [ ] Roślina nie może urosnąć w miejscu zwierzęcia
+- [ ] Poprawic mechanizm rozrostu trawy
 
 

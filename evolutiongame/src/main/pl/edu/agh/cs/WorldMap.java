@@ -6,7 +6,7 @@ import java.util.*;
 
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
     private List<Animal> animalsList = new ArrayList<>();
-    private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();
+    private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();        //skonsultować SortedSet
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private final Vector2D lowerLeft;
     private final Vector2D upperRight;
@@ -17,7 +17,6 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public final Integer plantEnergy = 100;
     public final Double jungleRatio = 0.5;
     public MapVisualizer visualizer;
-
 
     public WorldMap(Vector2D upperRight){
         this(upperRight, 10);
@@ -30,6 +29,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         this.height = upperRight.y + 1;
         this.width = upperRight.x + 1;
         this.startEnergy = startEnergy;
+
     }
 
 
@@ -172,9 +172,30 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 continue;
             }
             if (animalsMap.get(currentPosition).size() == 1){
-                animal.eat();
+                animal.eat(this.plantEnergy);
                 grassMap.remove(currentPosition);
                 continue;
+            }
+            else {
+                List<Animal> list = new ArrayList<>();
+                double max = 0;
+                for (Animal animal1 : animalsMap.get(currentPosition)){
+                    System.out.println(animal1 + " " + animal1.getEnergy());
+                    if (animal1.getEnergy() > max){
+                        list.clear();
+                        list.add(animal1);
+                        max = animal1.getEnergy();
+                    }else if (animal1.getEnergy() == max){
+                        list.add(animal1);
+                    }
+                }
+
+                int listSize = list.size();
+                for (Animal animal2 : list){
+                    animal2.eat(this.plantEnergy / listSize);
+                    System.out.println(animal2 + " " + animal2.getEnergy());
+                }
+                grassMap.remove(currentPosition);
             }
         }
     }
