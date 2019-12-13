@@ -9,10 +9,9 @@ TODO
 - [x] położyć na mapie ręcznie rośiny
 - [x] Dodać cykl dniowy (podajesz liczbe dni i robi się symulacja)
 - [x] Sprawić aby na mapie pojawiały się rośliny
-- [ ] Sprawić aby animale traciły energie przy poruszaniu się
-- [ ] Sprawić by zwierzęta umirały kiedy będą miały energie 0
+- [x] Sprawić aby animale traciły energie przy poruszaniu się
 - [ ] Sprawić aby animale zjadały rośliny i odradzały energie
-- [ ] Dodać mechanizm niszczenia animali o energii 0
+- [x] Dodać mechanizm niszczenia animali o energii 0
 - [ ] Dodać mechanizm rozmnażania
 - [ ] Dodać dżungle
 

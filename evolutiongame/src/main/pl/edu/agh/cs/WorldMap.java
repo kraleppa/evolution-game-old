@@ -5,14 +5,20 @@ import javax.sound.midi.SysexMessage;
 import java.util.*;
 
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
-    public List<Animal> animalsList = new ArrayList<>();
+    private List<Animal> animalsList = new ArrayList<>();
     private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private final Vector2D lowerLeft;
     private final Vector2D upperRight;
-    public final int width;
-    public final int height;
+    public final Integer width;
+    public final Integer height;
+    public final Integer startEnergy = 10;
+    public final Integer moveEnergy = 2;
+    public final Integer plantEnergy = 1;
+    public final Double jungleRatio = 0.5;
     public MapVisualizer visualizer;
+
+
     public WorldMap(Vector2D upperRight){
         this.upperRight = upperRight;
         this.lowerLeft = new Vector2D(0,0);
@@ -121,6 +127,41 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         if (!grassMap.containsKey(position)){
             Grass grass = new Grass(position);
             grassMap.put(position, grass);
+        }
+    }
+
+    public void turnAllAnimals(){
+        for (Animal animal : this.animalsList){
+            animal.turnAroundAuto();
+        }
+    }
+
+    public void moveAllAnimals(){
+        for (Animal animal : this.animalsList){
+            animal.move();
+        }
+    }
+
+    public void clearDeadAnimals(){
+        //animalsList.remove(i);
+        int i = 0;
+        boolean[] toDelete = new boolean[animalsList.size()];
+        for (Animal animal : animalsList){
+            if(animal.isDead()){
+                HashSet<Animal> tmp = this.animalsMap.get(animal.getPosition());
+                tmp.remove(animal);
+                toDelete[i] = true;
+            }
+            else{
+                toDelete[i] = false;
+            }
+            i++;
+        }
+
+        for (int j = 0; j < animalsList.size(); j++){
+            if (toDelete[j]){
+                animalsList.remove(j);
+            }
         }
 
     }

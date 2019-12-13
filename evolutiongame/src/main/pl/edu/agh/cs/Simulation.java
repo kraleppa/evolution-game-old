@@ -1,8 +1,16 @@
 package pl.edu.agh.cs;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Simulation {
     WorldMap map;
     int day;
+
 
     public Simulation(Vector2D upperRight){
         this.map = new WorldMap(upperRight);
@@ -15,13 +23,9 @@ public class Simulation {
     }
 
     public void nextDay(){
-        for (Animal animal : map.animalsList){
-            animal.turnAroundAuto();
-        }
-
-        for (Animal animal : map.animalsList){
-            animal.move();
-        }
+        map.turnAllAnimals();
+        map.moveAllAnimals();
+        map.clearDeadAnimals();
 
         for (int i = 0; i < Math.sqrt(map.width + map.height); i++){
             map.generateGrass();
@@ -39,6 +43,7 @@ public class Simulation {
             System.out.println(map.drawMap());
         }
     }
+
 
 
 }

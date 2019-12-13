@@ -25,6 +25,7 @@ public class Animal {
         this.position = map.betterPosition(initialPosition);
         this.map = map;
         this.genotype = Genotype;
+        this.energy = map.startEnergy;
     }
 
     static private Integer[] randomGenotype(){
@@ -38,14 +39,14 @@ public class Animal {
 
     public String toString(){
         switch(this.orientation){
-            case N: return "⭡";
-            case NE: return "⭧";
-            case E: return "⭢";
-            case SE: return "⭨";
-            case S: return "⭣";
-            case SW: return "⭩";
-            case W:  return "⭠";
-            case NW: return "⭦";
+            case N: return "↑";
+            case NE: return "↗";
+            case E: return "→";
+            case SE: return "↘";
+            case S: return "↓";
+            case SW: return "↙";
+            case W:  return "←";
+            case NW: return "↖";
             default: return null;
         }
     }
@@ -66,6 +67,7 @@ public class Animal {
         if (map.canMoveTo(newVector)){
             positionChanged(this.getPosition(), newVector);
             this.position = newVector;
+            this.energy -= map.moveEnergy;
         }
     }
 
@@ -89,6 +91,11 @@ public class Animal {
         for (IPositionChangeObserver observer : observersSet) {
             observer.positionChanged(oldPosition, newPosition, this);
         }
+    }
+
+    public boolean isDead(){
+        return (energy <= 0);
+
     }
 
 
