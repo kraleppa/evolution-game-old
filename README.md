@@ -17,5 +17,8 @@ TODO
 - [ ] Dodać dżungle
 - [ ] Roślina nie może urosnąć w miejscu zwierzęcia
 - [ ] Poprawic mechanizm rozrostu trawy
+- [ ] Dodać interfejs graficzny w swingu
+- [ ] Dodać statystyki wyświetlane w czasie rzeczywistym symulacji
+- [ ] Dodać zatrzymywanie symulacji
 
 
