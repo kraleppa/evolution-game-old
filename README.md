@@ -8,9 +8,7 @@ TODO
 - [x] Dodać funkcje obracajaca zwierzaka automatycznie
 - [x] położyć na mapie ręcznie rośiny
 - [x] Dodać cykl dniowy (podajesz liczbe dni i robi się symulacja)
-
 - [x] Sprawić aby na mapie pojawiały się rośliny
-
 - [x] Sprawić aby animale traciły energie przy poruszaniu się
 - [x] Sprawić aby animale zjadały rośliny i odradzały energie
 - [x] Dodać mechanizm niszczenia animali o energii 0
@@ -20,7 +18,7 @@ TODO
 
 Błędy poprawki
 - [ ] Ogarnąć konstruktory do animala
-- [ ] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
+- [x] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
 - [ ] Początkowy kierunek ma być losowy
 - [ ]  Skonsolidować klasę symulacja
 - [ ] Rośliny nie mogą pojawiać się na zwierzaku

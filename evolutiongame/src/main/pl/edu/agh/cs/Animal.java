@@ -34,6 +34,30 @@ public class Animal {
         for (int i = 0; i < 32; i++){
             genotype[i] = r.nextInt(8);
         }
+
+        int[] eliminatedGenes = new int[8];
+        Arrays.fill(eliminatedGenes, 0);
+        for (Integer gen : genotype){
+            eliminatedGenes[gen]++;
+        }
+
+        int repeat = 0;
+        for (int i = 0; i < 8; i++){
+            if (eliminatedGenes[i] == 0){
+                while(repeat < 32){                 //istnieje bardzo małe prawodopobieństwo że gen zniknie
+                    int randomGene = r.nextInt(32);
+                    if (eliminatedGenes[genotype[randomGene]] != 1){
+                        genotype[randomGene] = i;
+                        break;
+                    }
+                    repeat++;
+                }
+
+            }
+        }
+
+        Arrays.sort(genotype);
+
         return genotype;
     }
 
@@ -106,7 +130,7 @@ public class Animal {
     }
 
     public boolean canProcreate(){
-        return this.energy > (map.startEnergy / 4);
+        return this.energy > (map.startEnergy / 2);
     }
 
     public Animal procreate(Animal other){
@@ -133,7 +157,27 @@ public class Animal {
         for (int i = 21; i < 32; i++){
             childGenotype[i] = this.genotype[i];
         }
+        int[] eliminatedGenes = new int[8];
+        Arrays.fill(eliminatedGenes, 0);
+        for (Integer gen : childGenotype){
+            eliminatedGenes[gen]++;
+        }
+        int repeat = 0;
+        for (int i = 0; i < 8; i++){
+            if (eliminatedGenes[i] == 0){
+                while(repeat < 32){                 //istnieje bardzo małe prawodopobieństwo że gen zniknie
+                    int randomGene = random.nextInt(32);
+                    if (eliminatedGenes[childGenotype[randomGene]] != 1){
+                        childGenotype[randomGene] = i;
+                        break;
+                    }
+                    repeat++;
+                }
 
+            }
+        }
+
+        Arrays.sort(childGenotype);
 
         Animal child = new Animal(this.map, childPosition, childGenotype);
 

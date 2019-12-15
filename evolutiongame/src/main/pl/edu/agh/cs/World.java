@@ -22,7 +22,6 @@ public class World {
         map.place(new Animal(map));
         Simulation sim = new Simulation(map);
         sim.startSimulation(10);
-
         /*System.out.println(map.drawMap());
         JFrame frame = new JFrame();
         frame.setSize(1000,1000);
