@@ -6,7 +6,7 @@ import java.util.*;
 
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public List<Animal> animalsList = new ArrayList<>();
-    private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();        //skonsultować SortedSet
+    private Map<Vector2D, List<Animal>> animalsMap = new HashMap<>();
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private final Vector2D lowerLeft;
     private final Vector2D upperRight;
@@ -62,14 +62,15 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     @Override
     public boolean place(Animal animal){
         Vector2D animalPosition = animal.getPosition();
-        HashSet<Animal> tmp = animalsMap.get(animalPosition);
+        List<Animal> tmp = animalsMap.get(animalPosition);
         if (tmp == null){
-            tmp = new HashSet<>();
+            tmp = new ArrayList<>();
             tmp.add(animal);
             animalsMap.put(animalPosition, tmp);
         }
         else{
             tmp.add(animal);
+            tmp.sort(Comparator.comparing((Animal::getEnergy)));
         }
         animalsList.add(animal);
         animal.addObserver(this);
@@ -97,15 +98,15 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
 
     @Override
     public Object objectAt(Vector2D position){
-        HashSet<Animal> set = animalsMap.get(position);
-        if (set == null || set.isEmpty())
+        List<Animal> list = animalsMap.get(position);
+        if (list == null || list.isEmpty())
             return this.grassMap.get(position);
-        if (set.size() == 1){
-            for (Animal animal : set){
+        if (list.size() == 1){
+            for (Animal animal : list){
                 return animal;
             }
         }
-        return set;
+        return list;
     }
 
     public String drawMap(){
@@ -115,14 +116,15 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     @Override
     public void positionChanged(Vector2D oldPosition, Vector2D newPosition, Animal animal) {
         animalsMap.get(oldPosition).remove(animal);
-        HashSet<Animal> tmp = animalsMap.get(newPosition);
+        List<Animal> tmp = animalsMap.get(newPosition);
         if (tmp == null){
-            tmp = new HashSet<>();
+            tmp = new ArrayList<>();
             tmp.add(animal);
             animalsMap.put(newPosition, tmp);
         }
         else{
             tmp.add(animal);
+            tmp.sort(Comparator.comparing((Animal::getEnergy)));
         }
     }
 
@@ -133,6 +135,10 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
             Grass grass = new Grass(position);
             grassMap.put(position, grass);
         }
+    }
+
+    public void putGrass(Vector2D position){
+        grassMap.put(position, new Grass(position));
     }
 
     public void turnAllAnimals(){
@@ -153,7 +159,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         int i = 0;
         for (Animal animal : animalsListIterate){
             if(animal.isDead()){
-                HashSet<Animal> tmp = this.animalsMap.get(animal.getPosition());
+                List<Animal> tmp = this.animalsMap.get(animal.getPosition());
                 tmp.remove(animal);
                 animalsList.remove(i);
             }else{
@@ -177,21 +183,18 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 continue;
             }
             else {
-                List<Animal> list = new ArrayList<>();
-                double max = 0;
-                for (Animal animal1 : animalsMap.get(currentPosition)){
-                    if (animal1.getEnergy() > max){
-                        list.clear();
-                        list.add(animal1);
-                        max = animal1.getEnergy();
-                    }else if (animal1.getEnergy() == max){
-                        list.add(animal1);
+                List<Animal> sameEnergy = new ArrayList<>();
+                sameEnergy.add(animalsMap.get(currentPosition).get(animalsMap.get(currentPosition).size() - 1));
+                for (int i = animalsMap.get(currentPosition).size() - 2; i >= 0; i--){
+                    if (animalsMap.get(currentPosition).get(i).getEnergy() == animalsMap.get(currentPosition).get(i + 1).getEnergy()){
+                        sameEnergy.add(animalsMap.get(currentPosition).get(i));
+                    }
+                    else{
+                        break;
                     }
                 }
-
-                int listSize = list.size();
-                for (Animal animal2 : list){
-                    animal2.eat(this.plantEnergy / listSize);
+                for (Animal animal1 : sameEnergy){
+                    animal1.eat(this.plantEnergy / sameEnergy.size());
                 }
                 grassMap.remove(currentPosition);
             }
