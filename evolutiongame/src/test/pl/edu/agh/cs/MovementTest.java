@@ -72,8 +72,40 @@ public class MovementTest {
         sheep.turnAround(7);
         sheep.move();
         Assert.assertEquals(sheep, map3.objectAt(new Vector2D(6,0)));
-
-
     }
+
+    @Test
+    public void energyAndDeadTest(){
+        WorldMap map = new WorldMap(new Vector2D(6,6));
+        Animal rocky = new Animal(map, new Vector2D(5,5));
+        Animal pig = new Animal(map, new Vector2D(6,0));
+        map.place(pig);
+        map.place(rocky);
+        Assert.assertEquals(10.0, rocky.getEnergy(), 0.01);
+        rocky.move();
+        Assert.assertEquals(8.0, rocky.getEnergy(), 0.01);
+        rocky.move();
+        Assert.assertEquals(6.0, rocky.getEnergy(), 0.01);
+        rocky.move();
+        Assert.assertEquals(4.0, rocky.getEnergy(), 0.01);
+        rocky.move();
+        Assert.assertEquals(2.0, rocky.getEnergy(), 0.01);
+        rocky.move();
+        Assert.assertEquals(0.0, rocky.getEnergy(), 0.01);
+        Assert.assertEquals(rocky, map.objectAt(new Vector2D(5,3)));
+        map.clearDeadAnimals();
+        Assert.assertNotEquals(rocky, map.objectAt(new Vector2D(5,3)));
+        Assert.assertEquals(pig, map.objectAt(new Vector2D(6,0)));
+        pig.move();
+        pig.move();
+        pig.move();
+        pig.move();
+        pig.move();
+        Animal monkey = new Animal(map, new Vector2D(6,5));
+        map.place(monkey);
+        map.clearDeadAnimals();
+        Assert.assertEquals(monkey, map.objectAt(new Vector2D(6,5)));
+    }
+
 
 }

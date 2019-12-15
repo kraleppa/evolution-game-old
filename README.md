@@ -14,7 +14,7 @@ TODO
 - [x] Sprawić aby animale traciły energie przy poruszaniu się
 - [x] Sprawić aby animale zjadały rośliny i odradzały energie
 - [x] Dodać mechanizm niszczenia animali o energii 0
-- [ ] Ogarnąć testy dotychczasowej symulacji
+- [x] Ogarnąć testy dotychczasowej symulacji
 - [ ] Dodać mechanizm rozmnażania
 - [ ] Dodać dżungle
 
