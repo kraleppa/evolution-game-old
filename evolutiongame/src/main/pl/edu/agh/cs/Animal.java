@@ -7,7 +7,7 @@ public class Animal {
     private Vector2D position;
     private Azimuth orientation;
     private double energy;
-    private Integer[] genotype;
+    public final Integer[] genotype;
     WorldMap map;
     Set<IPositionChangeObserver> observersSet = new HashSet<>();
 
@@ -103,6 +103,43 @@ public class Animal {
 
     public void eat(double addEnergy){
         this.energy += addEnergy;
+    }
+
+    public boolean canProcreate(){
+        return this.energy > (map.startEnergy / 4);
+    }
+
+    public Animal procreate(Animal other){
+        //position
+        Random random = new Random();
+        int[] table = new int[]{-1,1};
+        int childX = this.position.x + table[random.nextInt(2)];
+        int childY = this.position.y + table[random.nextInt(2)];
+        Vector2D childPosition = map.betterPosition(new Vector2D(childX, childY));
+
+        //energy
+        double childEnergy = this.energy / 4 + other.energy / 4;
+
+        //genotype
+        Integer[] childGenotype = new Integer[32];
+        for (int i = 0; i < 11; i++){
+            childGenotype[i] = this.genotype[i];
+        }
+
+        for (int i = 11; i < 21; i++){
+            childGenotype[i] = other.genotype[i];
+        }
+
+        for (int i = 21; i < 32; i++){
+            childGenotype[i] = this.genotype[i];
+        }
+
+
+        Animal child = new Animal(this.map, childPosition, childGenotype);
+
+        //direction
+        child.turnAround(random.nextInt(8));
+        return child;
     }
 
 

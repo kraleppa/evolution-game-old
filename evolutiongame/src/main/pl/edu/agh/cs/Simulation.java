@@ -23,10 +23,11 @@ public class Simulation {
     }
 
     public void nextDay(){
+        map.clearDeadAnimals();
         map.turnAllAnimals();
         map.moveAllAnimals();
-        map.clearDeadAnimals();
         map.eatAll();
+        map.procreateAll();
         for (int i = 0; i < Math.sqrt(map.width + map.height); i++){
             map.generateGrass();
         }
@@ -34,13 +35,16 @@ public class Simulation {
     }
 
 
-    public void startSimulation(int numberOfDays){
+    public void startSimulation(int numberOfDays) throws InterruptedException {
         System.out.println("Day: " + day);
         System.out.println(map.drawMap());
+        //java.util.concurrent.TimeUnit.SECONDS.sleep(1);
+
         for (int i = 1; i <= numberOfDays; i++){
             this.nextDay();
             System.out.println("Day: " + day);
             System.out.println(map.drawMap());
+            //java.util.concurrent.TimeUnit.SECONDS.sleep(1);
         }
     }
 

@@ -5,24 +5,24 @@ import javax.sound.midi.SysexMessage;
 import java.util.*;
 
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
-    private List<Animal> animalsList = new ArrayList<>();
+    public List<Animal> animalsList = new ArrayList<>();
     private Map<Vector2D, HashSet<Animal>> animalsMap = new HashMap<>();        //skonsultować SortedSet
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private final Vector2D lowerLeft;
     private final Vector2D upperRight;
     public final Integer width;
     public final Integer height;
-    public final Integer startEnergy;
-    public final Integer moveEnergy = 2;
-    public final Integer plantEnergy = 100;
+    public final Double startEnergy;
+    public final Double moveEnergy = 2.0;
+    public final Double plantEnergy = 100.0;
     public final Double jungleRatio = 0.5;
     public MapVisualizer visualizer;
 
     public WorldMap(Vector2D upperRight){
-        this(upperRight, 10);
+        this(upperRight, 10.0);
     }
 
-    public WorldMap(Vector2D upperRight,Integer startEnergy){
+    public WorldMap(Vector2D upperRight,Double startEnergy){
         this.upperRight = upperRight;
         this.lowerLeft = new Vector2D(0,0);
         this.visualizer = new MapVisualizer(this);
@@ -180,7 +180,6 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 List<Animal> list = new ArrayList<>();
                 double max = 0;
                 for (Animal animal1 : animalsMap.get(currentPosition)){
-                    System.out.println(animal1 + " " + animal1.getEnergy());
                     if (animal1.getEnergy() > max){
                         list.clear();
                         list.add(animal1);
@@ -193,10 +192,19 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 int listSize = list.size();
                 for (Animal animal2 : list){
                     animal2.eat(this.plantEnergy / listSize);
-                    System.out.println(animal2 + " " + animal2.getEnergy());
                 }
                 grassMap.remove(currentPosition);
             }
+        }
+    }
+
+    public void procreateAll(){
+        List <Animal> childList = new ArrayList<>();
+
+
+
+        for (Animal animal : childList){
+            this.place(animal);
         }
     }
 }
