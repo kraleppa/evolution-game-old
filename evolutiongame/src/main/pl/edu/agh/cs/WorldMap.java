@@ -1,11 +1,10 @@
 package pl.edu.agh.cs;
 
-import javax.net.ssl.SSLContext;
-import javax.sound.midi.SysexMessage;
 import java.util.*;
 
 public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public List<Animal> animalsList = new ArrayList<>();
+    public Set<Grass> grassSet = new HashSet<>();
     private Map<Vector2D, List<Animal>> animalsMap = new HashMap<>();
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private final Vector2D lowerLeft;
@@ -134,11 +133,13 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         if (!grassMap.containsKey(position)){
             Grass grass = new Grass(position);
             grassMap.put(position, grass);
+            grassSet.add(grass);
         }
     }
 
     public void putGrass(Vector2D position){
         grassMap.put(position, new Grass(position));
+        grassSet.add(new Grass(position));
     }
 
     public void turnAllAnimals(){
@@ -179,7 +180,9 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
             }
             if (animalsMap.get(currentPosition).size() == 1){
                 animal.eat(this.plantEnergy);
+                grassSet.remove(grassMap.get(currentPosition));
                 grassMap.remove(currentPosition);
+
                 continue;
             }
             else {
@@ -196,6 +199,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 for (Animal animal1 : sameEnergy){
                     animal1.eat(this.plantEnergy / sameEnergy.size());
                 }
+                grassSet.remove(grassMap.get(currentPosition));
                 grassMap.remove(currentPosition);
             }
         }

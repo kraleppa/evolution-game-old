@@ -18,14 +18,22 @@ public class RenderPanel extends JPanel {
 
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        this.setSize((frame.getWidth()), frame.getHeight());
-        int width = frame.getWidth();
-        int height = frame.getHeight();
+        this.setSize((frame.getWidth()), frame.getHeight() -38);
+        int width = this.getWidth();
+        int height = this.getHeight();
         int widthScale = Math.round(width / map.width);
         int heightScale = height / map.height;
 
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, width, height);
+
+        g.setColor(new Color(0, 160, 7));
+        for (Grass grass : map.grassSet){
+            int y = grass.getPosition().y * heightScale;
+            int x = grass.getPosition().x * widthScale;
+            g.fillRect(x, y, widthScale, heightScale);
+
+        }
 
         for(Animal animal : map.animalsList){
             g.setColor(Color.black);
