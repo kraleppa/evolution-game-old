@@ -7,8 +7,9 @@ import java.util.Arrays;
 
 public class ProcreationTest {
     @Test
+    //there is a small chance that this test won't work
     public void simpleProcreationTest() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             WorldMap map = new WorldMap(new Vector2D(2, 2));
             Animal fox = new Animal(map, new Vector2D(1, 1));
             Animal foxie = new Animal(map, new Vector2D(1, 1));

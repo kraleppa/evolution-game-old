@@ -202,12 +202,27 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     }
 
     public void procreateAll(){
-        List <Animal> childList = new ArrayList<>();
-
-
-
+        List<Animal> childList = new ArrayList<>();
+        Set<Vector2D> hasPositionProcreated = new HashSet<>();
+        for (Animal animal : animalsList){
+            if (this.animalsMap.get(animal.getPosition()).size() == 1){
+                continue;
+            }
+            if (!hasPositionProcreated.contains(animal.getPosition())){
+                List<Animal> animalsOnPosition = this.animalsMap.get(animal.getPosition());
+                Animal father = animalsOnPosition.get(animalsOnPosition.size() - 1);
+                Animal mother = animalsOnPosition.get(animalsOnPosition.size() - 2);
+                hasPositionProcreated.add(animal.getPosition());
+                if (father.canProcreate() && mother.canProcreate()){
+                    System.out.print(animal.getPosition() + " born: ");
+                    childList.add(father.procreate(mother));
+                }
+            }
+        }
         for (Animal animal : childList){
             this.place(animal);
+            System.out.println(animal.getPosition() + " has been born");
         }
+
     }
 }

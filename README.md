@@ -13,7 +13,7 @@ TODO
 - [x] Sprawić aby animale zjadały rośliny i odradzały energie
 - [x] Dodać mechanizm niszczenia animali o energii 0
 - [x] Ogarnąć testy dotychczasowej symulacji
-- [ ] Dodać mechanizm rozmnażania
+- [x] Dodać mechanizm rozmnażania
 - [ ] Dodać dżungle
 
 Błędy poprawki
