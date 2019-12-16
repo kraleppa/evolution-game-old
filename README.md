@@ -16,7 +16,7 @@ TODO
 - [x] Dodać mechanizm rozmnażania
 - [x] Dodać dżungle
 
-Błędy poprawki
+Błędy i poprawki
 - [ ] Ogarnąć konstruktory do animala
 - [x] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
 - [ ] Początkowy kierunek ma być losowy
