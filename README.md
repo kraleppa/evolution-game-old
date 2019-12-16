@@ -14,14 +14,14 @@ TODO
 - [x] Dodać mechanizm niszczenia animali o energii 0
 - [x] Ogarnąć testy dotychczasowej symulacji
 - [x] Dodać mechanizm rozmnażania
-- [ ] Dodać dżungle
+- [x] Dodać dżungle
 
 Błędy poprawki
 - [ ] Ogarnąć konstruktory do animala
 - [x] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
 - [ ] Początkowy kierunek ma być losowy
-- [ ]  Skonsolidować klasę symulacja
-- [ ] Rośliny nie mogą pojawiać się na zwierzaku
+- [ ] Skonsolidować klasę symulacja
+- [x] Rośliny nie mogą pojawiać się na zwierzaku
 
 
 

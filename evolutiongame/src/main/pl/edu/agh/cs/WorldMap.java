@@ -9,6 +9,8 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
     private final Vector2D lowerLeft;
     private final Vector2D upperRight;
+    private final Vector2D jungleLowerLeft = new Vector2D(3,3);
+    private final Vector2D jungleUpperRight = new Vector2D(5,5);
     public final Integer width;
     public final Integer height;
     public final Double startEnergy;
@@ -129,17 +131,71 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
 
     public void generateGrass(){
         Random r = new Random();
-        Vector2D position = new Vector2D(r.nextInt(upperRight.x + 1), r.nextInt(upperRight.y + 1));
-        if (!grassMap.containsKey(position)){
-            Grass grass = new Grass(position);
-            grassMap.put(position, grass);
-            grassSet.add(grass);
+        int iterations = 0;
+        int tooManyTimes = (jungleUpperRight.x - jungleLowerLeft.x) * (jungleUpperRight.y - jungleLowerLeft.y);
+        while (iterations < tooManyTimes ){
+            int jungleGrassX = r.nextInt(jungleUpperRight.x - jungleLowerLeft.x + 1) + jungleLowerLeft.x;
+            int jungleGrassY = r.nextInt(jungleUpperRight.y - jungleLowerLeft.y + 1) + jungleLowerLeft.y;
+            Vector2D jungleGrassPosition = new Vector2D(jungleGrassX, jungleGrassY);
+            if (this.objectAt(jungleGrassPosition) == null){
+                putGrass(new Vector2D(jungleGrassX, jungleGrassY));
+                break;
+            }
+            iterations++;
         }
+        iterations = 0;
+        tooManyTimes = (upperRight.x * upperRight.y) - tooManyTimes;
+        int maxX = 0;
+        int maxY = 0;
+        int minY = 0;
+        int minX = 0;
+
+        while (iterations < tooManyTimes){
+            //step has 4 segments and following switch chooses one of them
+            switch(r.nextInt(4)){
+                case 0:
+                    minX = 0;
+                    maxX = upperRight.x;
+                    minY = 0;
+                    maxY = jungleLowerLeft.y;
+                    break;
+                case 1:
+                    minX = 0;
+                    maxX = jungleLowerLeft.x;
+                    minY = jungleLowerLeft.y;
+                    maxY = jungleUpperRight.y;
+                    break;
+                case 2:
+                    minX = jungleUpperRight.x;
+                    maxX = upperRight.x;
+                    minY = jungleLowerLeft.y;
+                    maxY = jungleUpperRight.y;
+                    break;
+                case 3:
+                    minX = 0;
+                    maxX = upperRight.x;
+                    minY = jungleUpperRight.y;
+                    maxY = upperRight.y;
+                    break;
+            }
+            int jungleGrassX = r.nextInt(maxX - minX + 1) + minX;
+            int jungleGrassY = r.nextInt(maxY - minY + 1) + minY;
+            Vector2D jungleGrassPosition = new Vector2D(jungleGrassX, jungleGrassY);
+            if (this.objectAt(jungleGrassPosition) == null){
+                putGrass(new Vector2D(jungleGrassX, jungleGrassY));
+                break;
+            }
+            iterations++;
+        }
+
+
+
     }
 
     public void putGrass(Vector2D position){
-        grassMap.put(position, new Grass(position));
-        grassSet.add(new Grass(position));
+        Grass grass = new Grass(position);
+        grassMap.put(position, grass);
+        grassSet.add(grass);
     }
 
     public void turnAllAnimals(){
@@ -182,7 +238,6 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 animal.eat(this.plantEnergy);
                 grassSet.remove(grassMap.get(currentPosition));
                 grassMap.remove(currentPosition);
-
                 continue;
             }
             else {

@@ -58,5 +58,18 @@ public class MainTest {
 
     }
 
+    @Test
+    public void grassEatingTest(){
+        WorldMap map = new WorldMap(new Vector2D(2,2));
+        map.place(new Animal(map, new Vector2D(1, 0)));
+        map.putGrass(new Vector2D(1,1));
+        map.moveAllAnimals();
+        map.eatAll();
+        map.moveAllAnimals();
+        Assert.assertNull(map.objectAt(new Vector2D(1,1)));
+        Assert.assertEquals(0, map.grassSet.size());
+
+    }
+
 
 }
