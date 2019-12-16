@@ -151,7 +151,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         int minX = 0;
 
         while (iterations < tooManyTimes){
-            //step has 4 segments and following switch chooses one of them
+            //steppe has 4 segments and following switch chooses one of them
             switch(r.nextInt(4)){
                 case 0:
                     minX = 0;
