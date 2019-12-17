@@ -34,7 +34,7 @@ public class RenderPanel extends JPanel {
     public RenderPanel(WorldMap map, JFrame frame){
         this.map = map;
         this.frame = frame;
-        this.setSize((frame.getWidth()), frame.getHeight() -38);
+        this.setSize((int) ((frame.getWidth()) * 0.5), frame.getHeight() -38);
         this.width = this.getWidth();
         this.height = this.getHeight();
         this.widthScale = Math.round(width / map.width);
