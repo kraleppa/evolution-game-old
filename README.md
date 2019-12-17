@@ -15,6 +15,7 @@ TODO
 - [x] Ogarnąć testy dotychczasowej symulacji
 - [x] Dodać mechanizm rozmnażania
 - [x] Dodać dżungle
+- [x] Zrobić ładną wizualizację
 
 Błędy i poprawki
 - [ ] Ogarnąć konstruktory do animala
@@ -22,6 +23,7 @@ Błędy i poprawki
 - [ ] Początkowy kierunek ma być losowy
 - [ ] Skonsolidować klasę symulacja
 - [x] Rośliny nie mogą pojawiać się na zwierzaku
+- [ ] Dzieci rodzą się tylko na pustych polach
 
 
 
