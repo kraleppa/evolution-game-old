@@ -55,6 +55,11 @@ public class RenderPanel extends JPanel {
             e.printStackTrace();
         }
         this.animal = this.animal.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+        this.animal2 = this.animal2.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+        this.animal3 = this.animal3.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+        this.animal4 = this.animal4.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+        this.animal5 = this.animal5.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+        this.animal5Plus = this.animal5Plus.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
         this.bush = this.bush.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
         this.jungle = this.jungle.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
         this.steppe = this.steppe.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
@@ -79,15 +84,15 @@ public class RenderPanel extends JPanel {
                         g.drawImage(this.animal, x * widthScale, y * heightScale, this);
                     }
                     if (map.objectAt(new Vector2D(x,y)) instanceof ArrayList){
-                        g.drawImage(this.animal2, x * widthScale, y * heightScale, this);
-                        /*switch (((ArrayList) map.objectAt(new Vector2D(x,y))).size()){
-                            case 2: g.drawImage(this.animal2, x * widthScale, y * heightScale, this);
-                            case 3: g.drawImage(this.animal3, x * widthScale, y * heightScale, this);
-                            case 4: g.drawImage(this.animal4, x * widthScale, y * heightScale, this);
-                            case 5: g.drawImage(this.animal5, x * widthScale, y * heightScale, this);
-                            default: g.drawImage(this.animal5Plus, x * widthScale, y * heightScale, this);
-                        }*/
-                        g.drawImage(this.animal, x * widthScale, y * heightScale, this);
+                        int size = ((ArrayList) map.objectAt(new Vector2D(x,y))).size();
+                        switch (size){
+                            case 2:  g.drawImage(this.animal2, x * widthScale, y * heightScale, this); break;
+                            case 3:  g.drawImage(this.animal3, x * widthScale, y * heightScale, this); break;
+                            case 4:  g.drawImage(this.animal4, x * widthScale, y * heightScale, this); break;
+                            case 5:  g.drawImage(this.animal5, x * widthScale, y * heightScale, this); break;
+                            default:  g.drawImage(this.animal5Plus, x * widthScale, y * heightScale, this); break;
+                        }
+
                     }
                     if (map.objectAt(new Vector2D(x, y)) instanceof Grass && map.isPositionJungle(new Vector2D(x,y))){
                         g.drawImage(this.bush, x * widthScale, y * heightScale, this);
