@@ -14,14 +14,14 @@ public class World {
     public static void main(String[] args) throws InterruptedException {
 
         WorldMap map = new WorldMap(new Vector2D(8,8));
-        Animal fox = new Animal(map, new Vector2D(2,2), new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7, 7, 7});
+        Animal fox = new Animal(map, new Vector2D(1,2), new Integer[]{0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 7, 7, 7, 7});
         Animal sheep = new Animal(map, new Vector2D(2,2), new Integer[]{0, 0, 0, 0, 3, 3, 3, 0, 1, 1, 4, 4, 4, 4, 4, 2, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 0, 0, 1, 1});
         map.place(fox);
         map.place(sheep);
-        map.place(new Animal(map));
-        map.place(new Animal(map));
-        map.place(new Animal(map));
-        map.place(new Animal(map));
+        map.place(new Animal(map, new Vector2D(2,1)));
+        map.place(new Animal(map, new Vector2D(4,2)));
+        map.place(new Animal(map, new Vector2D(2, 0)));
+        map.place(new Animal(map,  new Vector2D(0,5)));
         Simulation sim = new Simulation(map);
         sim.startSimulation(100);
         /*System.out.println(map.drawMap());
