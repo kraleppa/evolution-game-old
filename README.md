@@ -25,7 +25,6 @@ Błędy i poprawki
 - [ ] Skonsolidować klasę symulacja
 - [x] Rośliny nie mogą pojawiać się na zwierzaku
 - [ ] Dzieci rodzą się tylko na pustych polach
-- [ ] zmienić tekstury dżungli i stekg
 - [ ] zmienić teksturę kiedy jest wiele zwierząt na jednym polu
 
 
