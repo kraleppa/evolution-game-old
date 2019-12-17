@@ -16,6 +16,7 @@ TODO
 - [x] Dodać mechanizm rozmnażania
 - [x] Dodać dżungle
 - [x] Zrobić ładną wizualizację
+- [ ] Dodać licznik zwierząt⁷
 
 Błędy i poprawki
 - [ ] Ogarnąć konstruktory do animala
@@ -24,6 +25,7 @@ Błędy i poprawki
 - [ ] Skonsolidować klasę symulacja
 - [x] Rośliny nie mogą pojawiać się na zwierzaku
 - [ ] Dzieci rodzą się tylko na pustych polach
-
+- [ ] zmienić tekstury dżungli i stekg
+- [ ] zmienić teksturę kiedy jest wiele zwierząt na jednym polu
 
 
