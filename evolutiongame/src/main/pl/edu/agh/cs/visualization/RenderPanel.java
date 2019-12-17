@@ -20,6 +20,7 @@ public class RenderPanel extends JPanel {
     private Image bush;
     private Image jungle;
     private Image steppe;
+    private Image cactus;
     private int width;
     private int height;
     private int widthScale;
@@ -35,7 +36,7 @@ public class RenderPanel extends JPanel {
         this.heightScale = height / map.height;
 
         try {
-            this.animal = ImageIO.read(new File("Animal.png"));
+            this.animal = ImageIO.read(new File("Pig.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,6 +63,12 @@ public class RenderPanel extends JPanel {
         }
         this.steppe = this.steppe.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
 
+        try {
+            this.cactus = ImageIO.read(new File("Cactus.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.cactus = this.cactus.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
 
 
     }
@@ -86,8 +93,11 @@ public class RenderPanel extends JPanel {
                     if (map.objectAt(new Vector2D(x,y)) instanceof ArrayList){
                         g.drawImage(this.animal, x * widthScale, y * heightScale, this);
                     }
-                    if (map.objectAt(new Vector2D(x, y)) instanceof Grass){
+                    if (map.objectAt(new Vector2D(x, y)) instanceof Grass && map.isPositionJungle(new Vector2D(x,y))){
                         g.drawImage(this.bush, x * widthScale, y * heightScale, this);
+                    }
+                    if (map.objectAt(new Vector2D(x, y)) instanceof Grass && !map.isPositionJungle(new Vector2D(x,y))){
+                        g.drawImage(this.cactus, x * widthScale, y * heightScale, this);
                     }
 
                 }
