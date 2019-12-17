@@ -14,12 +14,13 @@ TODO
 - [x] Dodać mechanizm niszczenia animali o energii 0
 - [x] Ogarnąć testy dotychczasowej symulacji
 - [x] Dodać mechanizm rozmnażania
-- [x] Dodać dżungle
+- [x] Dodać jungle
 - [x] Zrobić ładną wizualizację
 - [ ] Dodać licznik zwierząt⁷
 
 Błędy i poprawki
 - [ ] Ogarnąć konstruktory do animala
+- [ ] Tworzenie jungli z jungleRatio
 - [x] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
 - [ ] Początkowy kierunek ma być losowy
 - [ ] Skonsolidować klasę symulacja
