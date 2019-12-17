@@ -53,7 +53,4 @@ public class Simulation {
             java.util.concurrent.TimeUnit.SECONDS.sleep(1);
         }
     }
-
-
-
 }

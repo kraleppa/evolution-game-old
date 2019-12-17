@@ -21,6 +21,11 @@ public class RenderPanel extends JPanel {
     private Image jungle;
     private Image steppe;
     private Image cactus;
+    private Image animal2;
+    private Image animal3;
+    private Image animal4;
+    private Image animal5;
+    private Image animal5Plus;
     private int width;
     private int height;
     private int widthScale;
@@ -37,40 +42,23 @@ public class RenderPanel extends JPanel {
 
         try {
             this.animal = ImageIO.read(new File("Pig.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.animal = this.animal.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
-
-        try {
+            this.animal2 = ImageIO.read(new File("Pig2.png"));
+            this.animal3 = ImageIO.read(new File("Pig3.png"));
+            this.animal4 = ImageIO.read(new File("Pig4.png"));
+            this.animal5 = ImageIO.read(new File("Pig5.png"));
+            this.animal5Plus = ImageIO.read(new File("Pig5plus.png"));
             this.bush = ImageIO.read(new File("Bush.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.bush = this.bush.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
-
-        try {
+            this.cactus = ImageIO.read(new File("SteppeBush.png"));
             this.jungle = ImageIO.read(new File("Jungle.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.jungle = this.jungle.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
-
-        try {
             this.steppe = ImageIO.read(new File("steppe.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.animal = this.animal.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+        this.bush = this.bush.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+        this.jungle = this.jungle.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
         this.steppe = this.steppe.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
-
-        try {
-            this.cactus = ImageIO.read(new File("Cactus.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         this.cactus = this.cactus.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
-
-
     }
 
     protected void paintComponent(Graphics g){
@@ -91,6 +79,14 @@ public class RenderPanel extends JPanel {
                         g.drawImage(this.animal, x * widthScale, y * heightScale, this);
                     }
                     if (map.objectAt(new Vector2D(x,y)) instanceof ArrayList){
+                        g.drawImage(this.animal2, x * widthScale, y * heightScale, this);
+                        /*switch (((ArrayList) map.objectAt(new Vector2D(x,y))).size()){
+                            case 2: g.drawImage(this.animal2, x * widthScale, y * heightScale, this);
+                            case 3: g.drawImage(this.animal3, x * widthScale, y * heightScale, this);
+                            case 4: g.drawImage(this.animal4, x * widthScale, y * heightScale, this);
+                            case 5: g.drawImage(this.animal5, x * widthScale, y * heightScale, this);
+                            default: g.drawImage(this.animal5Plus, x * widthScale, y * heightScale, this);
+                        }*/
                         g.drawImage(this.animal, x * widthScale, y * heightScale, this);
                     }
                     if (map.objectAt(new Vector2D(x, y)) instanceof Grass && map.isPositionJungle(new Vector2D(x,y))){
