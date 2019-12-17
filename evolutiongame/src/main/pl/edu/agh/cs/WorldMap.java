@@ -15,12 +15,12 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public final Integer height;
     public final Double startEnergy;
     public final Double moveEnergy = 2.0;
-    public final Double plantEnergy = 100.0;
+    public final Double plantEnergy = 10.0;
     public final Double jungleRatio = 0.5;
     public MapVisualizer visualizer;
 
     public WorldMap(Vector2D upperRight){
-        this(upperRight, 10.0);
+        this(upperRight, 60.0);
     }
 
     public WorldMap(Vector2D upperRight,Double startEnergy){
@@ -210,7 +210,8 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         }
     }
 
-    public void clearDeadAnimals(){
+    public int clearDeadAnimals(){
+        int killCount = 0;
         List<Animal> animalsListIterate = new ArrayList<>();
         animalsListIterate.addAll(animalsList);
         int i = 0;
@@ -219,13 +220,14 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 List<Animal> tmp = this.animalsMap.get(animal.getPosition());
                 tmp.remove(animal);
                 animalsList.remove(i);
+                killCount++;
             }else{
                 i++;
             }
 
         }
 
-
+        return killCount;
     }
 
     public void eatAll(){
@@ -260,7 +262,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
         }
     }
 
-    public void procreateAll(){
+    public int procreateAll(){
         List<Animal> childList = new ArrayList<>();
         Set<Vector2D> hasPositionProcreated = new HashSet<>();
         for (Animal animal : animalsList){
@@ -274,7 +276,11 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
                 hasPositionProcreated.add(animal.getPosition());
                 if (father.canProcreate() && mother.canProcreate()){
                     System.out.print(animal.getPosition() + " born: ");
-                    childList.add(father.procreate(mother));
+                    Animal child = father.procreate(mother);
+                    if (child != null){
+                        childList.add(child);
+                    }
+
                 }
             }
         }
@@ -282,6 +288,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
             this.place(animal);
             System.out.println(animal.getPosition() + " has been born");
         }
+        return childList.size();
     }
 
     public boolean isPositionJungle(Vector2D position){

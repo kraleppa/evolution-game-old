@@ -23,7 +23,7 @@ public class World {
         map.place(new Animal(map, new Vector2D(2, 0)));
         map.place(new Animal(map,  new Vector2D(0,5)));
         Simulation sim = new Simulation(map);
-        sim.startSimulation(100);
+        sim.startSimulation(1000);
         /*System.out.println(map.drawMap());
         JFrame frame = new JFrame();
         frame.setSize(1000,1000);

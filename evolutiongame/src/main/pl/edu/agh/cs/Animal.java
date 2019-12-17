@@ -135,11 +135,21 @@ public class Animal {
 
     public Animal procreate(Animal other){
         //position
+        Vector2D childPosition = null;
         Random random = new Random();
         int[] table = new int[]{-1,1};
-        int childX = this.position.x + table[random.nextInt(2)];
-        int childY = this.position.y + table[random.nextInt(2)];
-        Vector2D childPosition = map.betterPosition(new Vector2D(childX, childY));
+        for (int i = 0; i < 8; i++){
+            int childX = this.position.x + table[random.nextInt(2)];
+            int childY = this.position.y + table[random.nextInt(2)];
+            childPosition = map.betterPosition(new Vector2D(childX, childY));
+            if (map.objectAt(childPosition) == null){
+                break;
+            }
+            if (i == 7){
+                return null;
+            }
+        }
+
 
         //energy
         double childEnergy = this.energy / 4 + other.energy / 4;
