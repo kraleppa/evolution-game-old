@@ -19,6 +19,7 @@ public class RenderPanel extends JPanel {
     private Image animal;
     private Image bush;
     private Image jungle;
+    private Image steppe;
     private int width;
     private int height;
     private int widthScale;
@@ -54,6 +55,13 @@ public class RenderPanel extends JPanel {
         }
         this.jungle = this.jungle.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
 
+        try {
+            this.steppe = ImageIO.read(new File("steppe.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.steppe = this.steppe.getScaledInstance(widthScale, heightScale, Image.SCALE_DEFAULT);
+
 
 
     }
@@ -65,6 +73,12 @@ public class RenderPanel extends JPanel {
 
         for (int x = 0; x < this.map.width; x++){
             for (int y = 0; y < this.map.height; y++){
+                if (map.isPositionJungle(new Vector2D(x,y))){
+                    g.drawImage(this.jungle, x * widthScale, y * heightScale, this);
+                }
+                else{
+                    g.drawImage(this.steppe, x * widthScale, y * heightScale, this);
+                }
                 if (map.objectAt(new Vector2D(x, y)) != null){
                     if (map.objectAt(new Vector2D(x, y)) instanceof Animal){
                         g.drawImage(this.animal, x * widthScale, y * heightScale, this);

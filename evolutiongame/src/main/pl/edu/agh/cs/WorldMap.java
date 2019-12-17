@@ -282,6 +282,10 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
             this.place(animal);
             System.out.println(animal.getPosition() + " has been born");
         }
+    }
+
+    public boolean isPositionJungle(Vector2D position){
+        return (position.follows(jungleLowerLeft) && position.precedes(jungleUpperRight));
 
     }
 }
