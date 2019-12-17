@@ -2,6 +2,7 @@ package pl.edu.agh.cs.visualization;
 
 import pl.edu.agh.cs.Animal;
 import pl.edu.agh.cs.Grass;
+import pl.edu.agh.cs.Vector2D;
 import pl.edu.agh.cs.WorldMap;
 
 import javax.imageio.ImageIO;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RenderPanel extends JPanel {
     public WorldMap map;
@@ -61,21 +63,22 @@ public class RenderPanel extends JPanel {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, this.width, this.height);
 
-        for (Grass grass : map.grassSet){
-            int y = grass.getPosition().y * heightScale;
-            int x = grass.getPosition().x * widthScale;
-            g.drawImage(this.bush, x, y, this);
-        }
+        for (int x = 0; x < this.map.width; x++){
+            for (int y = 0; y < this.map.height; y++){
+                if (map.objectAt(new Vector2D(x, y)) != null){
+                    if (map.objectAt(new Vector2D(x, y)) instanceof Animal){
+                        g.drawImage(this.animal, x * widthScale, y * heightScale, this);
+                    }
+                    if (map.objectAt(new Vector2D(x,y)) instanceof ArrayList){
+                        g.drawImage(this.animal, x * widthScale, y * heightScale, this);
+                    }
+                    if (map.objectAt(new Vector2D(x, y)) instanceof Grass){
+                        g.drawImage(this.bush, x * widthScale, y * heightScale, this);
+                    }
 
-        for(Animal animal : map.animalsList){
-            g.setColor(Color.black);        this.setSize((frame.getWidth()), frame.getHeight() -38);
-        int width = this.getWidth();
-        int height = this.getHeight();
-        int widthScale = Math.round(width / map.width);
-        int heightScale = height / map.height;
-            int y = animal.getPosition().y * heightScale;;
-            int x = animal.getPosition().x * widthScale;;
-            g.drawImage(this.animal, x, y, this);
+                }
+            }
         }
     }
+
 }
