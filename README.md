@@ -16,7 +16,7 @@ TODO
 - [x] Dodać mechanizm rozmnażania
 - [x] Dodać jungle
 - [x] Zrobić ładną wizualizację
-- [ ] Dodać licznik zwierząt⁷
+- [x] Dodać licznik zwierząt⁷
 
 Błędy i poprawki
 - [ ] Ogarnąć konstruktory do animala
@@ -25,7 +25,8 @@ Błędy i poprawki
 - [ ] Początkowy kierunek ma być losowy
 - [ ] Skonsolidować klasę symulacja
 - [x] Rośliny nie mogą pojawiać się na zwierzaku
-- [ ] Dzieci rodzą się tylko na pustych polach
-- [ ] zmienić teksturę kiedy jest wiele zwierząt na jednym polu
+- [x] Dzieci rodzą się tylko na pustych polach
+- [x] zmienić teksturę kiedy jest wiele zwierząt na jednym polu
+- [ ] Dzieci rodzą się tylko na pustych polach ULEPSZYĆ
 
 
