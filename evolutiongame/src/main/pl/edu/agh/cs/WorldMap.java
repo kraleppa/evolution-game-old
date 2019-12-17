@@ -20,7 +20,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public MapVisualizer visualizer;
 
     public WorldMap(Vector2D upperRight){
-        this(upperRight, 50.0);
+        this(upperRight, 10.0);
     }
 
     public WorldMap(Vector2D upperRight,Double startEnergy){
