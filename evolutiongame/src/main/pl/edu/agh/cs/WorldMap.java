@@ -7,35 +7,54 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public Set<Grass> grassSet = new HashSet<>();
     private Map<Vector2D, List<Animal>> animalsMap = new HashMap<>();
     private Map<Vector2D, Grass> grassMap = new HashMap<>();
-    private final Vector2D lowerLeft;
+
+    //Constructor
     private final Vector2D upperRight;
-    private final Vector2D jungleLowerLeft = new Vector2D(3,3);
-    private final Vector2D jungleUpperRight = new Vector2D(5,5);
+    public final Double startEnergy;
+    public final Double moveEnergy;
+    public final Double plantEnergy;
+    public final Double jungleRatio;
+
+    private final Vector2D lowerLeft;
     public final Integer width;
     public final Integer height;
-    public final Double startEnergy;
-    public final Double moveEnergy = 2.0;
-    public final Double plantEnergy = 50.0;
-    public final Double jungleRatio = 0.5;
+    private final Vector2D jungleLowerLeft;
+    private final Vector2D jungleUpperRight;
     public MapVisualizer visualizer;
 
     public WorldMap(Vector2D upperRight){
-        this(upperRight, 60.0);
+        this(upperRight, 50.0);
     }
 
     public WorldMap(Vector2D upperRight,Double startEnergy){
+        this(upperRight, startEnergy, 2.0, 10.0);
+
+    }
+
+    public WorldMap(Vector2D upperRight, Double startEnergy, Double moveEnergy, Double plantEnergy){
+        this(upperRight, startEnergy, moveEnergy, plantEnergy, 0.333333);
+    }
+
+    public WorldMap(Vector2D upperRight, Double startEnergy, Double moveEnergy, Double plantEnergy, Double jungleRatio){
         this.upperRight = upperRight;
+        this.startEnergy = startEnergy;
+        this.moveEnergy = moveEnergy;
+        this.plantEnergy = plantEnergy;
+        this.jungleRatio = jungleRatio;
+
         this.lowerLeft = new Vector2D(0,0);
         this.visualizer = new MapVisualizer(this);
         this.height = upperRight.y + 1;
         this.width = upperRight.x + 1;
-        this.startEnergy = startEnergy;
 
+        int jungleWidth = (int) Math.round(width * jungleRatio);
+        int jungleHeight = (int) Math.round(height * jungleRatio);
+        this.jungleLowerLeft = new Vector2D((this.width - jungleWidth) / 2, (this.height - jungleHeight) / 2);
+        this.jungleUpperRight = new Vector2D(jungleLowerLeft.x + jungleWidth - 1, jungleLowerLeft.y + jungleWidth - 1);
     }
 
 
 
-    @Override
     public boolean canMoveTo(Vector2D position){
         return true;
     }

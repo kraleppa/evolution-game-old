@@ -23,7 +23,7 @@ Błędy i poprawki
 - [ ] Ogarnąć konstruktory do WorldMap
 - [ ] Ogarnąć konstruktory do Simulation
 - [ ] Lepsze losowanie trawy (zapisywać puste pola)
-- [ ] Tworzenie jungli z jungleRatio
+- [x] Tworzenie jungli z jungleRatio
 - [x] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
 - [x] Początkowy kierunek ma być losowy
 - [ ] Skonsolidować klasę symulacja
@@ -32,4 +32,7 @@ Błędy i poprawki
 - [x] zmienić teksturę kiedy jest wiele zwierząt na jednym polu
 - [x] Dzieci rodzą się tylko na pustych polach ULEPSZYĆ
 
+Testy
+- [ ] Sprawdzić czy animal się rodzi gdy pola w okół rodziców są zajęte
+- [ ] Testy tworzenia dzungli gdy mapa jest nieparzysta i parzysta
 
