@@ -136,9 +136,7 @@ public class Animal {
     }
 
     public Animal procreate(Animal other){
-        //position TO REWORK
        Random random = new Random();
-
         List <Vector2D> emptyPositions = new ArrayList<>();
         for (Azimuth azimuth : Azimuth.values()){
             Vector2D newPosition = this.map.betterPosition(this.position.add(azimuth.toUnitVector()));
@@ -191,9 +189,6 @@ public class Animal {
         Arrays.sort(childGenotype);
 
         Animal child = new Animal(this.map, childPosition, childGenotype, childEnergy);
-
-        //direction
-        child.turnAround(random.nextInt(8));
         return child;
     }
 
