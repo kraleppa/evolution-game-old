@@ -55,7 +55,7 @@ public class Simulation {
         System.out.println("Day: " + day);
         System.out.println(this.map.drawMap());
         JFrame frame = new JFrame();
-        frame.setSize(1000,500);
+        frame.setSize(1920,1080);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         RenderPanel panel = new RenderPanel(map, frame);
@@ -69,7 +69,7 @@ public class Simulation {
         JLabel totalPigsCount = new JLabel("Total number of animals: " + this.totalNumberOfAnimals);
         JLabel maxNumberOfPigs = new JLabel("Max number of animals: " + this.maxNumberOfAnimals);
 
-        infoPanel.setSize(300,500);
+        infoPanel.setSize((int) (0.5 * frame.getWidth()),500);
         infoPanel.add(dayCount);
         infoPanel.add(pigsCount);
         infoPanel.add(totalPigsCount);
