@@ -18,29 +18,27 @@ import java.io.IOException;
 public class JSON {
     public final Integer width;
     public final Integer height;
-    public final Integer startEnergy;
-    public final Integer moveEnergy;
-    public final Integer plantEnergy;
+    public final Double startEnergy;
+    public final Double moveEnergy;
+    public final Double plantEnergy;
     public final Double jungleRatio;
-    private final String fileName;
 
     public JSON(String fileName) {
         Integer width = null;
         Integer height = null;
-        Integer startEnergy = null;
-        Integer moveEnergy = null;
-        Integer plantEnergy = null;
+        Double startEnergy = null;
+        Double moveEnergy = null;
+        Double plantEnergy = null;
         Double jungleRatio = null;
-        this.fileName = fileName;
 
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(fileName)) {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
             height = Integer.parseInt((String) jsonObject.get("height"));
             width = Integer.parseInt((String) jsonObject.get("width"));
-            startEnergy = Integer.parseInt((String) jsonObject.get("startEnergy"));
-            moveEnergy = Integer.parseInt((String) jsonObject.get("moveEnergy"));
-            plantEnergy = Integer.parseInt((String) jsonObject.get("plantEnergy"));
+            startEnergy = Double.parseDouble((String) jsonObject.get("startEnergy"));
+            moveEnergy = Double.parseDouble((String) jsonObject.get("moveEnergy"));
+            plantEnergy = Double.parseDouble((String) jsonObject.get("plantEnergy"));
             jungleRatio = Double.parseDouble((String) jsonObject.get("jungleRatio"));
 
         } catch (IOException | ParseException e) {

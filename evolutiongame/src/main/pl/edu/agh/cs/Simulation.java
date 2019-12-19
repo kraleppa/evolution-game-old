@@ -9,23 +9,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 public class Simulation {
-    WorldMap map;
-    int day;
-    int numberOfAnimals = 6;
-    int totalNumberOfAnimals = 6;
-    int maxNumberOfAnimals;
+    private WorldMap map;
+    private int numberOfDays;
+    private int refreshTime;
 
-    public Simulation(Vector2D upperRight){
-        this.map = new WorldMap(upperRight);
+    private int day;
+    private int numberOfAnimals;
+    private int totalNumberOfAnimals;
+    private int maxNumberOfAnimals;
+
+    public Simulation(int numberOfDays, int numberOfStartAnimals, int refreshTime){
+        this.numberOfDays = numberOfDays;
+        this.numberOfAnimals = numberOfStartAnimals;
+        this.refreshTime = refreshTime;
         this.day = 0;
+        this.totalNumberOfAnimals = numberOfStartAnimals;
+        this.maxNumberOfAnimals = numberOfStartAnimals;
+        JSON mapDetails = new JSON();
+        Random random = new Random();
+        this.map = new WorldMap(new Vector2D(mapDetails.width - 1, mapDetails.height - 1), mapDetails.startEnergy, mapDetails.moveEnergy, mapDetails.plantEnergy, mapDetails.jungleRatio);
+        for (int i = 0; i < numberOfStartAnimals; i++){
+            map.place(new Animal(map, new Vector2D(random.nextInt(map.width), random.nextInt(map.height))));
+        }
     }
 
-    public Simulation(WorldMap map){
-        this.map = map;
-        this.day = 0;
-    }
     public void nextDay(){
         int deadAnimals = map.clearDeadAnimals();
         map.turnAllAnimals();
@@ -40,9 +50,10 @@ public class Simulation {
             maxNumberOfAnimals = numberOfAnimals;
         }
     }
-    public void startSimulation(int numberOfDays) throws InterruptedException {
+
+    public void startSimulation() throws InterruptedException {
         System.out.println("Day: " + day);
-        System.out.println(map.drawMap());
+        System.out.println(this.map.drawMap());
         JFrame frame = new JFrame();
         frame.setSize(1000,500);
         frame.setLocationRelativeTo(null);
@@ -81,7 +92,7 @@ public class Simulation {
             dayCount.setText("Day: " + this.day);
             totalPigsCount.setText("Total number of animals: " + this.totalNumberOfAnimals);
             maxNumberOfPigs.setText("Max number of animals: " + this.maxNumberOfAnimals);
-            java.util.concurrent.TimeUnit.MILLISECONDS.sleep(20);
+            java.util.concurrent.TimeUnit.MILLISECONDS.sleep(this.refreshTime);
         }
     }
 }

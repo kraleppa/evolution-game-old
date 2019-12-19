@@ -20,13 +20,13 @@ TODO
 
 Błędy i poprawki
 - [x] Ogarnąć konstruktory do animala
-- [ ] Ogarnąć konstruktory do WorldMap
-- [ ] Ogarnąć konstruktory do Simulation
+- [x] Ogarnąć konstruktory do WorldMap
+- [x] Ogarnąć konstruktory do Simulation
 - [ ] Lepsze losowanie trawy (zapisywać puste pola)
 - [x] Tworzenie jungli z jungleRatio
 - [x] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
 - [x] Początkowy kierunek ma być losowy
-- [ ] Skonsolidować klasę symulacja
+- [x] Skonsolidować klasę symulacja
 - [x] Rośliny nie mogą pojawiać się na zwierzaku
 - [x] Dzieci rodzą się tylko na pustych polach
 - [x] zmienić teksturę kiedy jest wiele zwierząt na jednym polu

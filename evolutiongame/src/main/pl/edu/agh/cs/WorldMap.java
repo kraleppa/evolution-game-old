@@ -147,7 +147,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
             tmp.sort(Comparator.comparing((Animal::getEnergy)));
         }
     }
-
+    //TO REWORK
     public void generateGrass(){
         Random r = new Random();
         int iterations = 0;
