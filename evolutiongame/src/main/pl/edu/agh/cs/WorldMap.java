@@ -15,7 +15,7 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     public final Integer height;
     public final Double startEnergy;
     public final Double moveEnergy = 2.0;
-    public final Double plantEnergy = 10.0;
+    public final Double plantEnergy = 50.0;
     public final Double jungleRatio = 0.5;
     public MapVisualizer visualizer;
 

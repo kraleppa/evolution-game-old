@@ -19,13 +19,19 @@ public class Animal {
         this(map, initialPosition, Animal.randomGenotype());
     }
 
-    public Animal(WorldMap map, Vector2D initialPosition, Integer[] Genotype){
+    public Animal(WorldMap map, Vector2D initialPosition, Integer[] genotype){
+        this(map, initialPosition, genotype, map.startEnergy);
+    }
 
+    public Animal(WorldMap map, Vector2D initialPosition, Integer[] genotype, double startEnergy){
         this.orientation = Azimuth.N;
         this.position = map.betterPosition(initialPosition);
         this.map = map;
-        this.genotype = Genotype;
+        this.genotype = genotype;
         this.energy = map.startEnergy;
+        int rnd = new Random().nextInt(8);
+        this.turnAround(rnd);
+        this.energy = startEnergy;
     }
 
     static private Integer[] randomGenotype(){
@@ -95,7 +101,7 @@ public class Animal {
         }
     }
 
-    protected void addObserver(IPositionChangeObserver observer){
+    public void addObserver(IPositionChangeObserver observer){
         observersSet.add(observer);
     }
 
@@ -105,10 +111,6 @@ public class Animal {
 
     public Vector2D getPosition(){
         return this.position;
-    }
-
-    public Azimuth getOrientation(){
-        return this.orientation;
     }
 
     private void positionChanged(Vector2D oldPosition, Vector2D newPosition) {
@@ -134,21 +136,20 @@ public class Animal {
     }
 
     public Animal procreate(Animal other){
-        //position
-        Vector2D childPosition = null;
-        Random random = new Random();
-        int[] table = new int[]{-1,1};
-        for (int i = 0; i < 8; i++){
-            int childX = this.position.x + table[random.nextInt(2)];
-            int childY = this.position.y + table[random.nextInt(2)];
-            childPosition = map.betterPosition(new Vector2D(childX, childY));
-            if (map.objectAt(childPosition) == null){
-                break;
-            }
-            if (i == 7){
-                return null;
+        //position TO REWORK
+       Random random = new Random();
+
+        List <Vector2D> emptyPositions = new ArrayList<>();
+        for (Azimuth azimuth : Azimuth.values()){
+            Vector2D newPosition = this.map.betterPosition(this.position.add(azimuth.toUnitVector()));
+            if (this.map.objectAt(newPosition) == null){
+                emptyPositions.add(newPosition);
             }
         }
+
+        if (emptyPositions.isEmpty()) return null;
+
+        Vector2D childPosition = emptyPositions.get(random.nextInt(emptyPositions.size()));
 
 
         //energy
@@ -189,7 +190,7 @@ public class Animal {
 
         Arrays.sort(childGenotype);
 
-        Animal child = new Animal(this.map, childPosition, childGenotype);
+        Animal child = new Animal(this.map, childPosition, childGenotype, childEnergy);
 
         //direction
         child.turnAround(random.nextInt(8));
