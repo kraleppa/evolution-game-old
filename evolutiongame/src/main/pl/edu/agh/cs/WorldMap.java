@@ -189,65 +189,29 @@ public class WorldMap implements IWorldMap, IPositionChangeObserver{
     }
 
     public void generateGrass(){
-        Random r = new Random();
-        int iterations = 0;
-        int tooManyTimes = (jungleUpperRight.x - jungleLowerLeft.x) * (jungleUpperRight.y - jungleLowerLeft.y);
-        while (iterations < tooManyTimes ){
-            int jungleGrassX = r.nextInt(jungleUpperRight.x - jungleLowerLeft.x + 1) + jungleLowerLeft.x;
-            int jungleGrassY = r.nextInt(jungleUpperRight.y - jungleLowerLeft.y + 1) + jungleLowerLeft.y;
-            Vector2D jungleGrassPosition = new Vector2D(jungleGrassX, jungleGrassY);
-            if (this.objectAt(jungleGrassPosition) == null){
-                putGrass(new Vector2D(jungleGrassX, jungleGrassY));
-                break;
+        if (emptySpacesJungle.size() != 0){
+            int item = new Random().nextInt(emptySpacesJungle.size());
+            int i = 0;
+            for (Vector2D position : emptySpacesJungle){
+                if (i == item){
+                    putGrass(position);
+                    break;
+                }
+                i++;
             }
-            iterations++;
-        }
-        iterations = 0;
-        tooManyTimes = (upperRight.x * upperRight.y) - tooManyTimes;
-        int maxX = 0;
-        int maxY = 0;
-        int minY = 0;
-        int minX = 0;
-
-        while (iterations < tooManyTimes){
-            //steppe has 4 segments and following switch chooses one of them
-            switch(r.nextInt(4)){
-                case 0:
-                    minX = 0;
-                    maxX = upperRight.x;
-                    minY = 0;
-                    maxY = jungleLowerLeft.y;
-                    break;
-                case 1:
-                    minX = 0;
-                    maxX = jungleLowerLeft.x;
-                    minY = jungleLowerLeft.y;
-                    maxY = jungleUpperRight.y;
-                    break;
-                case 2:
-                    minX = jungleUpperRight.x;
-                    maxX = upperRight.x;
-                    minY = jungleLowerLeft.y;
-                    maxY = jungleUpperRight.y;
-                    break;
-                case 3:
-                    minX = 0;
-                    maxX = upperRight.x;
-                    minY = jungleUpperRight.y;
-                    maxY = upperRight.y;
-                    break;
-            }
-            int jungleGrassX = r.nextInt(maxX - minX + 1) + minX;
-            int jungleGrassY = r.nextInt(maxY - minY + 1) + minY;
-            Vector2D jungleGrassPosition = new Vector2D(jungleGrassX, jungleGrassY);
-            if (this.objectAt(jungleGrassPosition) == null){
-                putGrass(new Vector2D(jungleGrassX, jungleGrassY));
-                break;
-            }
-            iterations++;
         }
 
-
+        if (emptySpaces.size() != 0){
+            int item2 = new Random().nextInt(emptySpaces.size());
+            int i2 = 0;
+            for (Vector2D position : emptySpaces){
+                if (i2 == item2){
+                    putGrass(position);
+                    break;
+                }
+                i2++;
+            }
+        }
 
     }
 

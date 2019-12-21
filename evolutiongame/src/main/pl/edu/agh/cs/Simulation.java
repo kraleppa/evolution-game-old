@@ -69,17 +69,12 @@ public class Simulation {
         JLabel pigsCount = new JLabel("Number of animals: " + this.numberOfAnimals);
         JLabel totalPigsCount = new JLabel("Total number of animals: " + this.totalNumberOfAnimals);
         JLabel maxNumberOfPigs = new JLabel("Max number of animals: " + this.maxNumberOfAnimals);
-        JLabel empty = new JLabel("empty " + map.emptySpaces.size());
-        JLabel emptyj = new JLabel("empty Jungle " + map.emptySpacesJungle.size());
-
 
         infoPanel.setSize((int) (0.5 * frame.getWidth()),500);
         infoPanel.add(dayCount);
         infoPanel.add(pigsCount);
         infoPanel.add(totalPigsCount);
         infoPanel.add(maxNumberOfPigs);
-        infoPanel.add(empty);
-        infoPanel.add(emptyj);
         infoPanel.setLayout(new GridLayout(20, 1));
         infoPanel.setVisible(true);
 
@@ -98,13 +93,8 @@ public class Simulation {
             dayCount.setText("Day: " + this.day);
             totalPigsCount.setText("Total number of animals: " + this.totalNumberOfAnimals);
             maxNumberOfPigs.setText("Max number of animals: " + this.maxNumberOfAnimals);
-            empty.setText("empty " + map.emptySpaces.size());
-            emptyj.setText("empty jungle " + map.emptySpacesJungle.size());
 
             java.util.concurrent.TimeUnit.MILLISECONDS.sleep(this.refreshTime);
-            if (i == 5){
-                map.putGrass(new Vector2D(0,0));
-            }
         }
     }
 }

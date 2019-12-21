@@ -22,7 +22,7 @@ Błędy i poprawki
 - [x] Ogarnąć konstruktory do animala
 - [x] Ogarnąć konstruktory do WorldMap
 - [x] Ogarnąć konstruktory do Simulation
-- [ ] Lepsze losowanie trawy (zapisywać puste pola)
+- [x] Lepsze losowanie trawy (zapisywać puste pola)
 - [x] Tworzenie jungli z jungleRatio
 - [x] genotypeGenerator poprawić (każde zwierze musi mieć każdy gen)
 - [x] Początkowy kierunek ma być losowy
