@@ -1,14 +1,18 @@
 package pl.edu.agh.cs.visualization;
 
+import pl.edu.agh.cs.Simulation;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-       /* details.put("width", "200");
-                details.put("height", "100");
-                details.put("jungleRatio", "0.5");
-                details.put("startEnergy", "10");
-                details.put("moveEnergy", "1");
-                details.put("plantEnergy", "2");
+/* details.put("width", "200");
+         details.put("height", "100");
+         details.put("jungleRatio", "0.5");
+         details.put("startEnergy", "10");
+         details.put("moveEnergy", "1");
+         details.put("plantEnergy", "2");
 */
 public class Menu {
 
@@ -72,17 +76,13 @@ public class Menu {
         TextField refreshTimeInsert = new TextField();
         frame.add(refreshTimeInsert);
 
+        Label white= new Label();
 
-
-        Button commit = new Button("Save options");
-        commit.setBackground(Color.LIGHT_GRAY);
         Button start = new Button("Start simulation");
         start.setBackground(Color.LIGHT_GRAY);
-
         this.startButton = start;
-        this.saveButton = commit;
 
-        frame.add(commit);
+        frame.add(white);
         frame.add(start);
         frame.setLayout(new GridLayout(10, 2, 10, 10));
         frame.setSize(500,800);
@@ -90,8 +90,19 @@ public class Menu {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
         Menu menu = new Menu();
+        menu.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Simulation sim = new Simulation();
+                try {
+                    sim.startSimulation();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }

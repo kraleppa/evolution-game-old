@@ -20,6 +20,8 @@ public class Simulation {
     private int numberOfAnimals;
     private int totalNumberOfAnimals;
     private int maxNumberOfAnimals;
+    private int bornAnimals;
+    private int deadAnimals;
 
     public Simulation(){
         JSON mapDetails = new JSON();
@@ -47,6 +49,8 @@ public class Simulation {
         day++;
         numberOfAnimals += bornAnimals - deadAnimals;
         totalNumberOfAnimals += bornAnimals;
+        this.deadAnimals += deadAnimals;
+        this.bornAnimals += bornAnimals;
         if (numberOfAnimals > maxNumberOfAnimals){
             maxNumberOfAnimals = numberOfAnimals;
         }
@@ -56,8 +60,7 @@ public class Simulation {
         System.out.println("Day: " + day);
         System.out.println(this.map.drawMap());
         JFrame frame = new JFrame();
-        frame.setSize(1920,1080);
-        frame.setLocationRelativeTo(null);
+        frame.setSize(1920,1053);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         RenderPanel panel = new RenderPanel(map, frame);
         frame.add(panel);
@@ -69,12 +72,16 @@ public class Simulation {
         JLabel pigsCount = new JLabel("Number of animals: " + this.numberOfAnimals);
         JLabel totalPigsCount = new JLabel("Total number of animals: " + this.totalNumberOfAnimals);
         JLabel maxNumberOfPigs = new JLabel("Max number of animals: " + this.maxNumberOfAnimals);
+        JLabel bornAnimals = new JLabel("Born animals: 0");
+        JLabel deadAnimals = new JLabel( "Dead animals: 0");
 
         infoPanel.setSize((int) (0.5 * frame.getWidth()),500);
         infoPanel.add(dayCount);
         infoPanel.add(pigsCount);
         infoPanel.add(totalPigsCount);
         infoPanel.add(maxNumberOfPigs);
+        infoPanel.add(bornAnimals);
+        infoPanel.add(deadAnimals);
         infoPanel.setLayout(new GridLayout(20, 1));
         infoPanel.setVisible(true);
 
@@ -93,7 +100,8 @@ public class Simulation {
             dayCount.setText("Day: " + this.day);
             totalPigsCount.setText("Total number of animals: " + this.totalNumberOfAnimals);
             maxNumberOfPigs.setText("Max number of animals: " + this.maxNumberOfAnimals);
-
+            deadAnimals.setText("Dead animals: " + this.deadAnimals);
+            bornAnimals.setText("Born animals: " + this.bornAnimals);
             java.util.concurrent.TimeUnit.MILLISECONDS.sleep(this.refreshTime);
         }
     }
