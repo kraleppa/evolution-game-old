@@ -32,7 +32,3 @@ Błędy i poprawki
 - [x] zmienić teksturę kiedy jest wiele zwierząt na jednym polu
 - [x] Dzieci rodzą się tylko na pustych polach ULEPSZYĆ
 
-Testy
-- [ ] Sprawdzić czy animal się rodzi gdy pola w okół rodziców są zajęte
-- [ ] Testy tworzenia dzungli gdy mapa jest nieparzysta i parzysta
-
