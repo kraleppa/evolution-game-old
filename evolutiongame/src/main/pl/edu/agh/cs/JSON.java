@@ -22,6 +22,9 @@ public class JSON {
     public final Double moveEnergy;
     public final Double plantEnergy;
     public final Double jungleRatio;
+    public final Integer days;
+    public final Integer animals;
+    public final Integer refresh;
 
     public JSON(String fileName) {
         Integer width = null;
@@ -30,6 +33,9 @@ public class JSON {
         Double moveEnergy = null;
         Double plantEnergy = null;
         Double jungleRatio = null;
+        Integer days = null;
+        Integer animals = null;
+        Integer refresh = null;
 
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(fileName)) {
@@ -40,6 +46,9 @@ public class JSON {
             moveEnergy = Double.parseDouble((String) jsonObject.get("moveEnergy"));
             plantEnergy = Double.parseDouble((String) jsonObject.get("plantEnergy"));
             jungleRatio = Double.parseDouble((String) jsonObject.get("jungleRatio"));
+            days = Integer.parseInt((String) jsonObject.get("days"));
+            animals = Integer.parseInt((String) jsonObject.get("animals"));
+            refresh = Integer.parseInt((String) jsonObject.get("refresh"));
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
@@ -51,6 +60,9 @@ public class JSON {
             this.jungleRatio = jungleRatio;
             this.moveEnergy = moveEnergy;
             this.plantEnergy =  plantEnergy;
+            this.days = days;
+            this.animals = animals;
+            this.refresh = refresh;
         }
     }
 

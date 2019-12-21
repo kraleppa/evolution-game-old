@@ -21,17 +21,18 @@ public class Simulation {
     private int totalNumberOfAnimals;
     private int maxNumberOfAnimals;
 
-    public Simulation(int numberOfDays, int numberOfStartAnimals, int refreshTime){
-        this.numberOfDays = numberOfDays;
-        this.numberOfAnimals = numberOfStartAnimals;
-        this.refreshTime = refreshTime;
-        this.day = 0;
-        this.totalNumberOfAnimals = numberOfStartAnimals;
-        this.maxNumberOfAnimals = numberOfStartAnimals;
+    public Simulation(){
         JSON mapDetails = new JSON();
+        this.numberOfDays = mapDetails.days;
+        this.numberOfAnimals = mapDetails.animals;
+        this.refreshTime = mapDetails.refresh;
+        this.day = 0;
+        this.totalNumberOfAnimals = mapDetails.animals;
+        this.maxNumberOfAnimals = mapDetails.animals;
+
         Random random = new Random();
         this.map = new WorldMap(new Vector2D(mapDetails.width - 1, mapDetails.height - 1), mapDetails.startEnergy, mapDetails.moveEnergy, mapDetails.plantEnergy, mapDetails.jungleRatio);
-        for (int i = 0; i < numberOfStartAnimals; i++){
+        for (int i = 0; i < mapDetails.animals; i++){
             map.place(new Animal(map, new Vector2D(random.nextInt(map.width), random.nextInt(map.height))));
         }
     }

@@ -1,4 +1,4 @@
-package pl.edu.agh.cs.JSONServices;
+package pl.edu.agh.cs.visualization;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,11 +13,14 @@ public class WriteJSON {
         //parameters
         JSONObject details = new JSONObject();
         details.put("width", "200");
-        details.put("height", "100");
+        details.put("height", "200");
         details.put("jungleRatio", "0.5");
         details.put("startEnergy", "10");
         details.put("moveEnergy", "1");
         details.put("plantEnergy", "2");
+        details.put("days", "200");
+        details.put("animals", "6");
+        details.put("refresh", "50");
 
 
         try (FileWriter file = new FileWriter("simulationParameters.json")) {

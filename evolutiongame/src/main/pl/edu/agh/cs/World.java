@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class World {
     public static void main(String[] args) throws InterruptedException {
-        Simulation sim = new Simulation(1000, 30,  30);
+        Simulation sim = new Simulation();
         sim.startSimulation();
     }
 

@@ -12,7 +12,9 @@ import java.awt.*;
 */
 public class Menu {
 
-    JFrame frame;
+    private JFrame frame;
+    private Button saveButton;
+    private Button startButton;
 
     public Menu(){
         frame = new JFrame("Menu");
@@ -52,11 +54,37 @@ public class Menu {
         TextField plantEnergyInsert = new TextField();
         frame.add(plantEnergyInsert);
 
+        Label days = new Label("Number of days");
+        frame.add(days);
 
-        Button button = new Button("Start Simulation");
-        button.setBackground(Color.LIGHT_GRAY);
-        frame.add(button);
-        frame.setLayout(new GridLayout(7, 2, 10, 10));
+        TextField daysInsert = new TextField();
+        frame.add(daysInsert);
+
+        Label animals = new Label("Number of start animals");
+        frame.add(animals);
+
+        TextField animalsInsert = new TextField();
+        frame.add(animalsInsert);
+
+        Label refreshTime = new Label("Refresh time (in miliseconds)");
+        frame.add(refreshTime);
+
+        TextField refreshTimeInsert = new TextField();
+        frame.add(refreshTimeInsert);
+
+
+
+        Button commit = new Button("Save options");
+        commit.setBackground(Color.LIGHT_GRAY);
+        Button start = new Button("Start simulation");
+        start.setBackground(Color.LIGHT_GRAY);
+
+        this.startButton = start;
+        this.saveButton = commit;
+
+        frame.add(commit);
+        frame.add(start);
+        frame.setLayout(new GridLayout(10, 2, 10, 10));
         frame.setSize(500,800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
